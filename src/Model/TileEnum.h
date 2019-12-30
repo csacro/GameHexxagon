@@ -72,6 +72,5 @@ enum TileEnum {
     TILE_61
 };
 
-//TODO
 
 #endif //GAMEHEXXAGON_TILEENUM_H

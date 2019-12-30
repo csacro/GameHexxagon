@@ -17,6 +17,4 @@ struct User {
     bool isConnected = false; //true if connected to server, else false
 };
 
-//TODO
-
 #endif //GAMEHEXXAGON_USER_H

@@ -15,6 +15,5 @@ enum TileStateEnum {
     BLOCKED //tile is blocked
 };
 
-//TODO
 
 #endif //GAMEHEXXAGON_TILESTATEENUM_H
