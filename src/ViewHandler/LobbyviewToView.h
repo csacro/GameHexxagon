@@ -7,11 +7,13 @@
 
 
 /**
- * interface to view used by Lobbyview
+ * interface to ViewHandler used by Lobbyview
  */
 class LobbyviewToView {
-    //TODO
-};
+public:
+    virtual void startGame() = 0;
+    virtual void leaveLobby() = 0;
+}; //TODO: documentation
 
 
 #endif //GAMEHEXXAGON_LOBBYVIEWTOVIEW_H

@@ -13,10 +13,11 @@
 #include "../Views/ViewToLobbyview.h"
 #include "../Views/ViewToGameview.h"
 #include "LobbyoverviewToView.h"
+#include "LobbyviewToView.h"
 //#include "../Client/ViewToClient.h"
 //#include "../DataHandler/ViewToData.h"
 
-class ViewHandler: public MainmenuToView, public LobbyoverviewToView {
+class ViewHandler: public MainmenuToView, public LobbyoverviewToView, public LobbyviewToView {
 public:
     /**
      * Constructor
@@ -25,7 +26,7 @@ public:
      * @param vtd ViewToData to communicate with DataHandler
      */
     ViewHandler(ListenerRenderWindow &listenerRenderWindow,
-            ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo);
+            ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo, ViewToLobbyview &vtl);
 
     void connectServer(std::string server) override;
 
@@ -43,6 +44,10 @@ public:
 
     void showMainmenu() override;
 
+    void startGame() override;
+
+    void leaveLobby() override;
+
 private:
     ListenerRenderWindow *mWindow; //here Views are rendered
     //ViewToData *mToData; //interface to DataHandler
@@ -52,6 +57,11 @@ private:
     ViewToLobbyoverview *mToLobbyoverview; //interface to Lobbyoverview
     ViewToLobbyview *mToLobbyview; //interface to Lobbyview
     ViewToGameview *mToGameview; //interface to Gameview
+
+    /**
+     * method to switch View to Lobbyview
+     */
+    void showLobbyview();
 
 //TODO: work in progress
 };

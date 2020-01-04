@@ -7,7 +7,7 @@
 
 
 /**
- * interface to view used by Gameview
+ * interface to ViewHandler used by Gameview
  */
 class GameviewToView {
     //TODO

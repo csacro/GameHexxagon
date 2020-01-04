@@ -11,14 +11,22 @@
 
 
 ViewHandler::ViewHandler(ListenerRenderWindow &listenerRenderWindow,
-        ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo) {
+        ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo, ViewToLobbyview &vtl) {
     mWindow = &listenerRenderWindow;
 
     mToMainmenu = &vtm;
     mToLobbyoverview = &vtlo;
+    mToLobbyview = &vtl;
+    //TODO
 
-    //showMainmenu();
-    showLobbyoverview();
+    showMainmenu();
+
+}
+
+void ViewHandler::showLobbyview() {
+    mWindow->clearLists();
+    mWindow->addElement(mToLobbyview);
+    mWindow->addListener(mToLobbyview);
 }
 
 void ViewHandler::connectServer(std::string server) {
@@ -30,7 +38,7 @@ void ViewHandler::disconnectServer(std::string server) {
 }
 
 void ViewHandler::showLobbyoverview() {
-    //mWindow->clearLists();
+    mWindow->clearLists();
     mWindow->addElement(mToLobbyoverview);
     mWindow->addListener(mToLobbyoverview);
 }
@@ -39,6 +47,7 @@ void ViewHandler::close() {
     //TODO: if (connected): disconnect with server
     //TODO onConnect: disconnect with server
     //TODO onDisconnected: window.close()
+    mWindow->close();
 }
 
 void ViewHandler::updateLobbyoverview() {
@@ -57,4 +66,12 @@ void ViewHandler::showMainmenu() {
     mWindow->clearLists();
     mWindow->addElement(mToMainmenu);
     mWindow->addListener(mToMainmenu);
+}
+
+void ViewHandler::startGame() {
+    //TODO
+}
+
+void ViewHandler::leaveLobby() {
+    //TODO
 }

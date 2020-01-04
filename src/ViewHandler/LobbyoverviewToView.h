@@ -9,7 +9,7 @@
 #include <string>
 
 /**
- * interface to view used by Lobbyoverview
+ * interface to ViewHandler used by Lobbyoverview
  */
 class LobbyoverviewToView {
 public:

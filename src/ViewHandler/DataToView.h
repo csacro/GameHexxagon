@@ -7,7 +7,7 @@
 
 
 /**
- * interface to view used by DataHandler
+ * interface to ViewHandler used by DataHandler
  */
 class DataToView {
 public:
