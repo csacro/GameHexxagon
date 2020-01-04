@@ -3,6 +3,7 @@ project(src_Client)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(src_Client
+add_library(src_Client
         ViewToClient.h
-        Client.cpp Client.h MessageType.h)
+        Client.cpp Client.h
+        MessageType.h)

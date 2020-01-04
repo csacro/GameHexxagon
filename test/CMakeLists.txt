@@ -4,3 +4,5 @@ project(GameHexxagon_test)
 set(CMAKE_CXX_STANDARD 17)
 
 enable_testing()
+
+#TODO link gtest and evtl gmock

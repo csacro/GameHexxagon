@@ -7,4 +7,4 @@ add_library(src_Model
         Board.h Game.h Lobby.h TileStateEnum.h TileEnum.h User.h)
 
 set_target_properties(src_Model PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(src_Model nlohmann)
+#TODO link nlohmann

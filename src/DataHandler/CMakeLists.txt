@@ -3,7 +3,7 @@ project(src_DataHandler)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(src_DataHandler
+add_library(src_DataHandler
         ClientToData.h
         ViewToData.h
         DataHandler.cpp DataHandler.h)
