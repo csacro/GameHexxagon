@@ -22,7 +22,7 @@ public:
 
     /**
      * Constructor
-     * @param mtv MainmenuToView to communicate with ViewHandler
+     * @param lotv LobbyoverviewToView to communicate with ViewHandler
      * @param font sf::Font used to display sf::Text
      * @param windowSize sf::Vector2u which is size of sf::RenderWindow
      */

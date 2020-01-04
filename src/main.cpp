@@ -9,6 +9,7 @@
 #include "Views/Mainmenu.h"
 #include "Views/Lobbyoverview.h"
 #include "Views/Lobbyview.h"
+#include "Views/Gameview.h"
 
 int main() {
     setenv("DISPLAY", "127.0.0.1:0", true);
@@ -23,12 +24,14 @@ int main() {
     Mainmenu m;
     Lobbyoverview lo;
     Lobbyview l;
+    Gameview g;
 
-    ViewHandler v(lrw, m, lo, l);
+    ViewHandler v(lrw, m, lo, l, g);
 
     m = Mainmenu(v, arial, lrw.getSize());
     lo = Lobbyoverview(v, arial, lrw.getSize());
     l = Lobbyview(v, arial, lrw.getSize());
+    g = Gameview(v, arial, lrw.getSize());
 
     lrw.run(sf::Color::Cyan);
 }
