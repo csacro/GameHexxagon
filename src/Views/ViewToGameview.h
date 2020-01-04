@@ -6,6 +6,8 @@
 #define GAMEHEXXAGON_VIEWTOGAMEVIEW_H
 
 
+#include <SFMLComponents/WindowViews/WindowView.h>
+
 /**
  * interface to Gameview used by ViewHandler
  */

@@ -6,6 +6,8 @@
 #define GAMEHEXXAGON_VIEWTOLOBBYVIEW_H
 
 
+#include <SFMLComponents/WindowViews/WindowView.h>
+
 /**
  * interface to Lobbyview used by ViewHandler
  */

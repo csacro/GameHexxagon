@@ -8,14 +8,15 @@
 
 #include <SFMLComponents/Window/ListenerRenderWindow.h>
 #include "MainmenuToView.h"
-//#include "../DataHandler/ViewToData.h"
-//#include "../Client/ViewToClient.h"
 #include "../Views/ViewToMainmenu.h"
 #include "../Views/ViewToLobbyoverview.h"
 #include "../Views/ViewToLobbyview.h"
 #include "../Views/ViewToGameview.h"
+#include "LobbyoverviewToView.h"
+//#include "../Client/ViewToClient.h"
+//#include "../DataHandler/ViewToData.h"
 
-class ViewHandler: public MainmenuToView {
+class ViewHandler: public MainmenuToView, public LobbyoverviewToView {
 public:
     /**
      * Constructor
@@ -24,7 +25,7 @@ public:
      * @param vtd ViewToData to communicate with DataHandler
      */
     ViewHandler(ListenerRenderWindow &listenerRenderWindow,
-            ViewToMainmenu &vtm);
+            ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo);
 
     void connectServer(std::string server) override;
 
@@ -33,6 +34,14 @@ public:
     void showLobbyoverview() override;
 
     void close() override;
+
+    void updateLobbyoverview() override;
+
+    void createAndJoinLobby(std::string lobbyName, std::string userName) override;
+
+    void joinLobby(std::string lobbyName, std::string userName) override;
+
+    void showMainmenu() override;
 
 private:
     ListenerRenderWindow *mWindow; //here Views are rendered
