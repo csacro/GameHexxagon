@@ -28,12 +28,10 @@ public:
     virtual std::list<std::string> getGameStrings()  = 0;
     virtual std::list<bool> getGameBooleans()  = 0;
     virtual std::list<TileEnum> getLastMove()  = 0;
-    virtual Board getBoard()  = 0;
+    virtual ModelBoard::Board getBoard()  = 0;
     virtual bool isMoveValid(TileEnum moveFrom, TileEnum moveTo)  = 0;
     virtual std::list<TileEnum> getNeighbours(std::list<TileEnum> kacheln)  = 0;
-}; //TODO
-
-//TODO
+}; //TODO: documentation
 
 
 #endif //GAMEHEXXAGON_VIEWTODATA_H

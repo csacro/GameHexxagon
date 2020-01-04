@@ -18,9 +18,7 @@ public:
     virtual void gotLobbyStatus() = 0;
     virtual void infoGameStarted() = 0;
     virtual void gotGameStatus() = 0;
-}; //TODO
-
-//TODO
+}; //TODO: documentation
 
 
 #endif //GAMEHEXXAGON_DATATOVIEW_H

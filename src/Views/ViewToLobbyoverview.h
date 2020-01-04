@@ -9,7 +9,7 @@
 /**
  * interface to Lobbyoverview used by ViewHandler
  */
-class ViewToLobbyoverview{
+class ViewToLobbyoverview: public WindowView {
     //TODO
 };
 

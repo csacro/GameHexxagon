@@ -9,7 +9,7 @@
 /**
  * interface to Gameview used by ViewHandler
  */
-class ViewToGameview{
+class ViewToGameview: public WindowView {
     //TODO
 };
 
