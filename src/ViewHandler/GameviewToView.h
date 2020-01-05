@@ -15,9 +15,19 @@
 class GameviewToView {
 public:
     virtual std::list<TileEnum> getNeighbours(std::list<TileEnum> tiles) = 0;
+
+    /**
+     * called after user has decided from which Tile to move to which Tile
+     * @param moveFrom TileEnum tile that user moves Stone from
+     * @param moveTo TileEnum tile that user moves Stone to
+     */
     virtual void move(TileEnum moveFrom, TileEnum moveTo) = 0;
+
+    /**
+     * called when the user wants to leave the Game
+     */
     virtual void leaveGame() = 0;
-}; //TODO: documentation
+}; //TODO: documentation (getNeighbours for spielfeld)
 
 
 #endif //GAMEHEXXAGON_GAMEVIEWTOVIEW_H

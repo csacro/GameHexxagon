@@ -23,7 +23,7 @@ public:
     virtual void forwardLobbyStatus(ModelLobby::Lobby lobby) = 0;
     virtual void infoGameStarted() = 0;
     virtual void forwardGameStatus(ModelGame::Game game) = 0;
-}; //TODO: documentation
+}; //TODO: documentation (after Client implemented)
 
 
 #endif //GAMEHEXXAGON_CLIENTTODATA_H

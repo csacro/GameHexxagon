@@ -11,9 +11,17 @@
  */
 class LobbyviewToView {
 public:
+    /**
+     * called when the user wants to start the Game
+     * (only possible if two players in Lobby and user is playerOne)
+     */
     virtual void startGame() = 0;
+
+    /**
+     * called when user wants to leave the Lobby and return to Lobbyoverview
+     */
     virtual void leaveLobby() = 0;
-}; //TODO: documentation
+};
 
 
 #endif //GAMEHEXXAGON_LOBBYVIEWTOVIEW_H
