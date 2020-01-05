@@ -32,7 +32,7 @@ public:
 
     void listen(sf::Event event, sf::RenderWindow &renderWindow) override;
 
-    void display(std::vector<std::string> lobbyNames) override;
+    void display(std::list<std::string> lobbyNames) override;
 
 private:
     inline static LobbyoverviewToView *mToView; //interface to ViewHandler

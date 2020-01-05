@@ -53,7 +53,7 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     usernameClick = OnClickListener(userName, usernameClickFunction);
     lobbynameClick = OnClickListener(lobbyName, lobbynameClickFunction);
 
-    std::vector<std::string> emptyList;
+    std::list<std::string> emptyList;
     display(emptyList);
 }
 
@@ -108,7 +108,7 @@ void Lobbyoverview::listen(sf::Event event, sf::RenderWindow &renderWindow) {
     lobbynameClick.listen(event, renderWindow);
 }
 
-void Lobbyoverview::display(std::vector<std::string> lobbyNames) {
+void Lobbyoverview::display(std::list<std::string> lobbyNames) {
     userName.mEdit = true;
     sf::String availablelobbiesText("");
     if(!lobbyNames.empty()) {

@@ -44,7 +44,7 @@ void Mainmenu::connectionClickFunction() {
     if(connection.getText() == "CONNECT") {
         mToView->connectServer(server.getText());
     } else {
-        mToView->disconnectServer(server.getText());
+        mToView->disconnectServer();
     }
 }
 

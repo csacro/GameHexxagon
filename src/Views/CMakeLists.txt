@@ -9,4 +9,3 @@ add_library(src_Views
 
 target_link_libraries(src_Views
         SFMLComponents)
-#TODO: why SFMLComponent EditText with margin ???

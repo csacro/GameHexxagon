@@ -26,6 +26,4 @@ enum MessageType {
     Strike
 };
 
-//TODO
-
 #endif //GAMEHEXXAGON_MESSAGETYPE_H

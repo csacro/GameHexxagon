@@ -17,6 +17,7 @@
 class ViewToData {
 public:
     virtual std::string getUserId() = 0;
+    virtual std::string getUserName() = 0;
     virtual std::string getLobbyId() = 0;
     virtual std::string getGameId() = 0;
     virtual bool isConnected() = 0;

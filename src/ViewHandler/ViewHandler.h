@@ -15,10 +15,12 @@
 #include "LobbyoverviewToView.h"
 #include "LobbyviewToView.h"
 #include "GameviewToView.h"
-//#include "../Client/ViewToClient.h"
-//#include "../DataHandler/ViewToData.h"
+#include "../Client/ViewToClient.h"
+#include "../DataHandler/ViewToData.h"
+#include "DataToView.h"
 
-class ViewHandler: public MainmenuToView, public LobbyoverviewToView, public LobbyviewToView, public GameviewToView {
+class ViewHandler: public MainmenuToView, public LobbyoverviewToView, public LobbyviewToView, public GameviewToView,
+                    public DataToView {
 public:
     /**
      * Constructor
@@ -31,12 +33,12 @@ public:
      * @param vtd ViewToData to communicate with DataHandler
      */
     ViewHandler(ListenerRenderWindow &listenerRenderWindow,
-            ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo, ViewToLobbyview &vtl, ViewToGameview &vtg);
-    //TODO: vtc and vtd
+            ViewToMainmenu &vtm, ViewToLobbyoverview &vtlo, ViewToLobbyview &vtl, ViewToGameview &vtg,
+            ViewToData &vtd, ViewToClient &vtc);
 
     void connectServer(std::string server) override;
 
-    void disconnectServer(std::string server) override;
+    void disconnectServer() override;
 
     void showLobbyoverview() override;
 
@@ -60,10 +62,24 @@ public:
 
     void leaveGame() override;
 
+    void infoConnected(bool isConnected) override;
+
+    void gotAvailableLobbies() override;
+
+    void infoLobbyCreated(bool success) override;
+
+    void infoLobbyJoined(bool success) override;
+
+    void gotLobbyStatus() override;
+
+    void infoGameStarted() override;
+
+    void gotGameStatus() override;
+
 private:
     ListenerRenderWindow *mWindow; //here Views are rendered
-    //ViewToData *mToData; //interface to DataHandler
-    //ViewToClient *mToClient; //interface to Client
+    ViewToData *mToData; //interface to DataHandler
+    ViewToClient *mToClient; //interface to Client
 
     ViewToMainmenu *mToMainmenu; //interface to Mainmenu
     ViewToLobbyoverview *mToLobbyoverview; //interface to Lobbyoverview

@@ -14,9 +14,9 @@
  */
 class ViewToClient {
 public:
-    virtual void connect() = 0;
-    virtual void getAvailableLobbies(std::string userId, std::string lobbyName) = 0;
-    virtual void createNewLobby(std::string userId, std::string lobbyId, std::string lobbyName) = 0;
+    virtual void connect(std::string server) = 0;
+    virtual void getAvailableLobbies(std::string userId) = 0;
+    virtual void createNewLobby(std::string userId, std::string lobbyName) = 0;
     virtual void joinLobby(std::string userId, std::string lobbyId, std::string userName) = 0;
     virtual void leaveLobby(std::string userId, std::string lobbyId) = 0;
     virtual void startGame(std::string userId, std::string lobbyId) = 0;
@@ -24,9 +24,7 @@ public:
     virtual void leaveGame(std::string userId, std::string gameId) = 0;
     virtual void disconnect(std::string userId) = 0;
 
-}; //TODO
-
-//TODO
+}; //TODO: documentation
 
 
 #endif //GAMEHEXXAGON_VIEWTOCLIENT_H

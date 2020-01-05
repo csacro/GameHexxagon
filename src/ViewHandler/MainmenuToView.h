@@ -14,7 +14,7 @@
 class MainmenuToView {
 public:
     virtual void connectServer(std::string server) = 0;
-    virtual void disconnectServer(std::string server) = 0;
+    virtual void disconnectServer() = 0;
     virtual void showLobbyoverview() = 0;
     virtual void close() = 0;
 }; //TODO: documentation

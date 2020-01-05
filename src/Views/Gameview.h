@@ -6,6 +6,9 @@
 #define GAMEHEXXAGON_GAMEVIEW_H
 
 
+#include <SFMLComponents/Elements/TextField.h>
+#include <SFMLComponents/Elements/Button.h>
+#include <SFMLComponents/Listener/OnClickListener.h>
 #include "ViewToGameview.h"
 #include "../ViewHandler/GameviewToView.h"
 
@@ -37,16 +40,25 @@ public:
                  ModelBoard::Board board, bool isTie, bool isWinner) override;
 
 private:
+    void displayPlayerPoints(std::string &playerOnePoints, std::string &playerTwoPoints);
+
     inline static GameviewToView *mToView; //interface to ViewHandler
 
     //Elements
-    //TODO
+    //TODO: spielfeld
+    inline static TextField playerOneUsername; //TextField to display name of playerOne
+    inline static TextField playerTwoUsername; //TextField to display name of playerTwo
+    inline static TextField playerOnepoints; //TextField to display points of playerOne
+    inline static TextField playerTwopoints; //TextField to display points of playerTwo
+    inline static Button leave; //Button to leave Game
 
     //Listener
-    //TODO
+    //TODO: spielfeld
+    inline static OnClickListener leaveClick; //for leave
 
     //Listener methods
-    //TODO
+    //TODO: spielfeld
+    static void leaveClickFunction();
 };
 
 
