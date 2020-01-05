@@ -21,6 +21,7 @@ int main() {
     sf::Font arial;
     if (!arial.loadFromFile("../../res/fonts/arial.ttf")) {
         std::cout << "cannot load font" << std::endl;
+        exit(2);
     }
 
     Mainmenu m;
@@ -33,6 +34,9 @@ int main() {
 
     ViewHandler v(lrw, m, lo, l, g, d, c);
 
+    d = DataHandler(v);
+    c = Client(d);
+
     m = Mainmenu(v, arial, lrw.getSize());
     lo = Lobbyoverview(v, arial, lrw.getSize());
     l = Lobbyview(v, arial, lrw.getSize());
@@ -40,5 +44,7 @@ int main() {
 
     lrw.run(sf::Color::Cyan);
 
-    return 0;
+    exit(0);
+
+    //TODO: Thread for Client???
 }

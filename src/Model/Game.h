@@ -39,7 +39,7 @@ namespace ModelGame {
      * @param j nlohmann::json containing Game as JSON
      * @param game struct Game that is getting initialised by j
      */
-    void from_json(const nlohmann::json &j, Game &game) {
+    /*TODO void from_json(const nlohmann::json &j, Game &game) {
         game.gameId = j.at("gameId").get<std::string>();
         game.playerOne = j.at("playerOne").get<std::string>();
         game.playerTwo = j.at("playerTwo").get<std::string>();
@@ -57,7 +57,7 @@ namespace ModelGame {
         game.tie = j.at("tie").get<bool>();
         game.winner = j.at("winner").get<std::string>();
         game.isClosed = j.at("isClosed").get<bool>();
-    }
+    }*/
 
 } //namespace ModelGame
 

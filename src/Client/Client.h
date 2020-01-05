@@ -7,11 +7,25 @@
 
 
 #include "ViewToClient.h"
+#include "../DataHandler/ClientToData.h"
 
 class Client: public ViewToClient {
-//TODO: COMPLETE CLASS
+//TODO: COMPLETE CLASS + FIND WEBSOCKET-API
+private:
+    ClientToData *mToData;
 
 public:
+    /**
+     * default Constructor
+     */
+    Client() = default;
+
+    /**
+     * Constructor
+     * @param dtv DataToView to communicate with ViewHandler
+     */
+    Client(ClientToData &ctd);
+
     void connect(std::string server) override;
 
     void getAvailableLobbies(std::string userId) override;

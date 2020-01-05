@@ -12,6 +12,4 @@ add_subdirectory(Model)
 add_executable(GameHexxagon_src main.cpp)
 
 target_link_libraries(GameHexxagon_src
-        src_Model src_Client src_DataHandler src_ViewHandler src_Views
-        sfml-graphics sfml-window sfml-system)
-#TODO find WebSocket
+        src_Model src_Client src_DataHandler src_ViewHandler src_Views)

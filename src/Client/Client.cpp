@@ -6,6 +6,11 @@
 
 //TODO: COMPLETE IMPL
 
+Client::Client(ClientToData &ctd) {
+    mToData = &ctd;
+}
+
+
 void Client::connect(std::string server) {
 
 }

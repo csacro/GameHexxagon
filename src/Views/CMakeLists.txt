@@ -8,4 +8,5 @@ add_library(src_Views
         Gameview.cpp Gameview.h Lobbyview.cpp Lobbyview.h Lobbyoverview.cpp Lobbyoverview.h Mainmenu.cpp Mainmenu.h)
 
 target_link_libraries(src_Views
-        SFMLComponents)
+        SFMLComponents
+        sfml-graphics sfml-window sfml-system)

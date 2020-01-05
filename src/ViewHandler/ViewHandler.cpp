@@ -101,7 +101,7 @@ void ViewHandler::leaveLobby() {
 }
 
 std::list<TileEnum> ViewHandler::getNeighbours(std::list<TileEnum> tiles) {
-    //TODO: getNeighbours for spielfed
+    //TODO: getNeighbours for spielfeld
     return std::list<TileEnum>();
 }
 

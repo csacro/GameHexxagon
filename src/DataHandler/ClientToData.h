@@ -18,8 +18,8 @@ class ClientToData {
 public:
     virtual void setUserId(std::string userId) = 0;
     virtual void forwardAvailableLobbies(std::list<ModelLobby::Lobby> lobbies) = 0;
-    virtual void infoLobbyCreated(bool success) = 0;
-    virtual void infoLobbyJoined(bool succes) = 0;
+    virtual void infoLobbyCreated(std::string lobbyId, bool success) = 0;
+    virtual void infoLobbyJoined(bool success) = 0;
     virtual void forwardLobbyStatus(ModelLobby::Lobby lobby) = 0;
     virtual void infoGameStarted() = 0;
     virtual void forwardGameStatus(ModelGame::Game game) = 0;

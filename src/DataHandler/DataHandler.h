@@ -6,12 +6,34 @@
 #define GAMEHEXXAGON_DATAHANDLER_H
 
 
+#include <list>
 #include "ViewToData.h"
+#include "ClientToData.h"
+#include "../ViewHandler/DataToView.h"
+#include "../Model/Game.h"
+#include "../Model/User.h"
 
-class DataHandler: public ViewToData {
-//TODO: COMPLETE CLASS
+class DataHandler: public ViewToData, public ClientToData {
+private:
+    DataToView *mToView;
+
+    User mUser;
+    std::list<ModelLobby::Lobby> mAvailableLobbies;
+    ModelLobby::Lobby mLobby;
+    ModelGame::Game mGame;
 
 public:
+    /**
+     * default Constructor
+     */
+    DataHandler() = default;
+
+    /**
+     * Constructor
+     * @param dtv DataToView to communicate with ViewHandler
+     */
+    DataHandler(DataToView &dtv);
+
     std::string getUserId() override;
 
     std::string getUserName() override;
@@ -43,6 +65,20 @@ public:
     bool isMoveValid(TileEnum moveFrom, TileEnum moveTo) override;
 
     std::list<TileEnum> getNeighbours(std::list<TileEnum> kacheln) override;
+
+    void setUserId(std::string userId) override;
+
+    void forwardAvailableLobbies(std::list<ModelLobby::Lobby> lobbies) override;
+
+    void infoLobbyCreated(std::string lobbyId, bool success) override;
+
+    void infoLobbyJoined(bool success) override;
+
+    void forwardLobbyStatus(ModelLobby::Lobby lobby) override;
+
+    void infoGameStarted() override;
+
+    void forwardGameStatus(ModelGame::Game game) override;
 };
 
 
