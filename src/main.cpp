@@ -46,5 +46,21 @@ int main() {
 
     exit(0);
 
-    //TODO: Thread for Client???
+    //TODO: Thread for Client !?!?!?
+    //TODO: Doxygen ???
+    //TODO: SonarQube ???
+    //TODO: Docker ???
+
+    /*TODO: write tests
+     * Schreiben Sie Unit-Tests mindestens f¨ur folgende Funktionalit¨aten des Spiels: Senden und Empfangen von
+     * Nachrichten, Einhaltung der Spielregeln.
+     * Dies bedeutet f¨ur das Senden und Empfangen von Nachrichten: Testen Sie ob beim Erhalt der Nachricht X die
+     * daf¨ur vorgesehene Aktion Y erfolgreich ausgef¨uhrt wird. Testen Sie, ob sich Ihr Programm korrekt verh¨alt, wenn
+     * die Nachricht X erwartet wird, allerdings die Nachricht Z empfangen wird. Testen Sie ob eine von Ihnen zu
+     * sendende Nachricht X alle im Netzwerkstandard geforderten Eigenschaften besitzt.
+     * Dies bedeutet f¨ur die Einhaltung der Spielregeln: Wenn der Spieler zum Beispiel einen Spielzug an Ihre
+     * Programmlogik ¨ubergibt, welche diesen Spielzug an den Server ¨ubertragen soll, dann soll Ihre Spiellogik nur
+     * valide Spielz¨uge an den Server senden. Pr¨ufen Sie mit Hilfe von Unit-Tests, ob Ihre Programmlogik verbotene
+     * Spielz¨uge als solche erkennt und diese zur¨uckweist.
+     */
 }

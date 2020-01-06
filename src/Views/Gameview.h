@@ -58,7 +58,7 @@ private:
 
     //Listener methods
     //TODO: spielfeld
-    static void leaveClickFunction();
+    static void leaveClickFunction(Listener *listener);
 };
 
 

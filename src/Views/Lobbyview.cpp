@@ -41,11 +41,11 @@ Lobbyview::Lobbyview(LobbyviewToView &ltv, sf::Font &font, sf::Vector2u windowSi
 }
 
 
-void Lobbyview::leaveClickFunction() {
+void Lobbyview::leaveClickFunction(Listener *listener) {
     mToView->leaveLobby();
 }
 
-void Lobbyview::startClickFunction() {
+void Lobbyview::startClickFunction(Listener *listener) {
     mToView->startGame();
 }
 

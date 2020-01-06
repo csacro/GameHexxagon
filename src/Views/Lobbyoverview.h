@@ -56,13 +56,13 @@ private:
     inline static OnClickListener lobbynameClick; //for lobbyName
 
     //Listener methods
-    static void createandjoinClickFunction();
-    static void joinClickFunction();
-    static void updateClickFunction();
-    static void backClickFunction();
-    static void nameTextFunction();
-    static void usernameClickFunction();
-    static void lobbynameClickFunction();
+    static void createandjoinClickFunction(Listener *listener);
+    static void joinClickFunction(Listener *listener);
+    static void updateClickFunction(Listener *listener);
+    static void backClickFunction(Listener *listener);
+    static void nameTextFunction(Listener *listener);
+    static void usernameClickFunction(Listener *listener);
+    static void lobbynameClickFunction(Listener *listener);
 };
 
 

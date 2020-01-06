@@ -46,7 +46,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     displayPlayerNames("", "");
 }
 
-void Gameview::leaveClickFunction() {
+void Gameview::leaveClickFunction(Listener *listener) {
     mToView->leaveGame();
 }
 

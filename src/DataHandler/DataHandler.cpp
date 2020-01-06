@@ -68,8 +68,16 @@ std::list <std::string> DataHandler::getGameStrings() {
 }
 
 std::list<bool> DataHandler::getGameBooleans() {
-    //TODO: winner / turn logic
-    return std::list<bool>();
+    if(mGame.tie) {
+        return {true, false};
+    }
+    if(!mGame.winner.empty()) {
+        return {false, mUser.userId == mGame.winner};
+    }
+    if(mGame.playerOneLeft || mGame.playerTwoLeft) {
+        return {false, true};
+    }
+    return {mUser.userId == mGame.activePlayer};
 }
 
 std::list <TileEnum> DataHandler::getLastMove() {

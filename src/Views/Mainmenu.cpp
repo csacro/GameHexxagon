@@ -40,7 +40,7 @@ Mainmenu::Mainmenu(MainmenuToView &mtv, sf::Font &font, sf::Vector2u windowSize)
 }
 
 
-void Mainmenu::connectionClickFunction() {
+void Mainmenu::connectionClickFunction(Listener *listener) {
     if(connection.getText() == "CONNECT") {
         mToView->connectServer(server.getText());
     } else {
@@ -48,15 +48,15 @@ void Mainmenu::connectionClickFunction() {
     }
 }
 
-void Mainmenu::lobbyoverviewClickFunction() {
+void Mainmenu::lobbyoverviewClickFunction(Listener *listener) {
     mToView->showLobbyoverview();
 }
 
-void Mainmenu::endClickFunction() {
+void Mainmenu::endClickFunction(Listener *listener) {
     mToView->close();
 }
 
-void Mainmenu::serverTextFunction() {
+void Mainmenu::serverTextFunction(Listener *listener) {
     server.addText(serverText.mLastText);
 }
 

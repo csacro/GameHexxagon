@@ -57,33 +57,33 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     display(emptyList);
 }
 
-void Lobbyoverview::createandjoinClickFunction() {
+void Lobbyoverview::createandjoinClickFunction(Listener *listener) {
     mToView->createAndJoinLobby(lobbyName.getText(), userName.getText());
 }
 
-void Lobbyoverview::joinClickFunction() {
+void Lobbyoverview::joinClickFunction(Listener *listener) {
     mToView->joinLobby(lobbyName.getText(), userName.getText());
 }
 
-void Lobbyoverview::updateClickFunction() {
+void Lobbyoverview::updateClickFunction(Listener *listener) {
     mToView->updateLobbyoverview();
 }
 
-void Lobbyoverview::backClickFunction() {
+void Lobbyoverview::backClickFunction(Listener *listener) {
     mToView->showMainmenu();
 }
 
-void Lobbyoverview::nameTextFunction() {
+void Lobbyoverview::nameTextFunction(Listener *listener) {
     userName.addText(nameText.mLastText);
     lobbyName.addText(nameText.mLastText);
 }
 
-void Lobbyoverview::usernameClickFunction() {
+void Lobbyoverview::usernameClickFunction(Listener *listener) {
     userName.mEdit = true;
     lobbyName.mEdit = false;
 }
 
-void Lobbyoverview::lobbynameClickFunction() {
+void Lobbyoverview::lobbynameClickFunction(Listener *listener) {
     userName.mEdit = false;
     lobbyName.mEdit = true;
 }

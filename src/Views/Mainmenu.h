@@ -50,10 +50,10 @@ private:
     inline static OnTextListener serverText; //text input (to server)
 
     //Listener methods
-    static void connectionClickFunction();
-    static void lobbyoverviewClickFunction();
-    static void endClickFunction();
-    static void serverTextFunction();
+    static void connectionClickFunction(Listener *listener);
+    static void lobbyoverviewClickFunction(Listener *listener);
+    static void endClickFunction(Listener *listener);
+    static void serverTextFunction(Listener *listener);
 };
 
 

@@ -49,8 +49,8 @@ private:
     inline static OnClickListener startClick; //for start
 
     //Listener methods
-    static void leaveClickFunction();
-    static void startClickFunction();
+    static void leaveClickFunction(Listener *listener);
+    static void startClickFunction(Listener *listener);
 };
 
 
