@@ -18,7 +18,8 @@ ViewHandler::ViewHandler(ListenerRenderWindow &listenerRenderWindow,
     mToData = &vtd;
     mToClient = &vtc;
 
-    showMainmenu();
+    //showMainmenu();
+    showGameview();
 }
 
 void ViewHandler::showLobbyview() {
@@ -111,8 +112,10 @@ void ViewHandler::move(TileEnum moveFrom, TileEnum moveTo) {
     }
 }
 
-void ViewHandler::leaveGame() {
-    mToClient->leaveGame(mToData->getUserId(), mToData->getGameId());
+void ViewHandler::leaveGame(bool sendLeave) {
+    if(sendLeave) {
+        mToClient->leaveGame(mToData->getUserId(), mToData->getGameId());
+    }
     showLobbyoverview();
 }
 

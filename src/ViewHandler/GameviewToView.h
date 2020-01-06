@@ -25,8 +25,9 @@ public:
 
     /**
      * called when the user wants to leave the Game
+     * @param sendLeave true if Game is left before there is a winner
      */
-    virtual void leaveGame() = 0;
+    virtual void leaveGame(bool sendLeave) = 0;
 }; //TODO: documentation (getNeighbours for spielfeld)
 
 

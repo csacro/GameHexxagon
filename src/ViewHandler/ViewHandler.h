@@ -60,7 +60,7 @@ public:
 
     void move(TileEnum moveFrom, TileEnum moveTo) override;
 
-    void leaveGame() override;
+    void leaveGame(bool sendLeave) override;
 
     void infoConnected(bool isConnected) override;
 
