@@ -14,6 +14,11 @@
  */
 class GameviewToView {
 public:
+    /**
+     * called by Gameview to get to know neighbours of all tiles in paramlist
+     * @param tiles std::list<TileEnum> containing all Tiles Gameview wants to know neighbours of
+     * @return std::list<TileEnum> containing neighbours of all TileEnums in tiles
+     */
     virtual std::list<TileEnum> getNeighbours(std::list<TileEnum> tiles) = 0;
 
     /**
@@ -28,7 +33,7 @@ public:
      * @param sendLeave true if Game is left before there is a winner
      */
     virtual void leaveGame(bool sendLeave) = 0;
-}; //TODO: documentation (getNeighbours for spielfeld)
+};
 
 
 #endif //GAMEHEXXAGON_GAMEVIEWTOVIEW_H

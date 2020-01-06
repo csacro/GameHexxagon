@@ -145,7 +145,7 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
 }
 
 void Gameview::updateBoard(TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board) {
-    //TODO
+    //TODO: updateBoard
 }
 
 void Gameview::displayPlayerPoints(std::string &playerOnePoints, std::string &playerTwoPoints) {
