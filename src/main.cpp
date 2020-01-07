@@ -42,14 +42,15 @@ int main() {
     l = Lobbyview(v, arial, lrw.getSize());
     g = Gameview(v, arial, lrw.getSize());
 
-    lrw.run(sf::Color::Cyan);
+    lrw.run(sf::Color::Black);
 
     exit(0);
 
     //TODO: Thread for Client !?!?!?
-    //TODO: Doxygen ???
-    //TODO: SonarQube ???
-    //TODO: Docker ???
+
+    //todo: Doxygen ???
+    //todo: SonarQube ???
+    //todo: Docker ???
 
     /*TODO: write tests
      * Schreiben Sie Unit-Tests mindestens f¨ur folgende Funktionalit¨aten des Spiels: Senden und Empfangen von

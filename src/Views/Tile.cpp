@@ -34,6 +34,10 @@ void Tile::setStoneColor(sf::Color color) {
     mStone.setFillColor(color);
 }
 
+sf::Color Tile::getStoneColor() {
+    return mStone.getFillColor();
+}
+
 bool Tile::isPointInElement(sf::Vector2i point) {
     sf::FloatRect shape = mHexagon.getGlobalBounds();
     return shape.contains(point.x, point.y);

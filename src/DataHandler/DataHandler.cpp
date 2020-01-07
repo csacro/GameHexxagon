@@ -74,9 +74,6 @@ std::list<bool> DataHandler::getGameBooleans() {
     if(!mGame.winner.empty()) {
         return {false, mUser.userId == mGame.winner};
     }
-    if(mGame.playerOneLeft || mGame.playerTwoLeft) {
-        return {false, true};
-    }
     return {mUser.userId == mGame.activePlayer};
 }
 
@@ -89,12 +86,39 @@ ModelBoard::Board DataHandler::getBoard() {
 }
 
 bool DataHandler::isMoveValid(TileEnum moveFrom, TileEnum moveTo) {
-    //TODO: isMoveValid for spielfeld
+    if(isMoveFromPossible(moveFrom)) {
+        std::list<TileEnum> direct = getValidDirectNeighbours(moveTo);
+        for(TileEnum &tileEnum: direct) {
+            if(moveTo == tileEnum) {
+                return true;
+            }
+        }
+        std::list<TileEnum> secondary = getValidSecondaryNeighbours(moveTo);
+        for(TileEnum &tileEnum: secondary) {
+            if(moveTo == tileEnum) {
+                return true;
+            }
+        }
+    }
     return false;
 }
 
-std::list <TileEnum> DataHandler::getNeighbours(std::list <TileEnum> kacheln) {
-    //TODO: getNeighbours for spielfeld
+bool DataHandler::isMoveFromPossible(TileEnum moveFrom) {
+    ModelBoard::Board curBoard = mGame.board;
+    TileStateEnum myStone = PLAYERTWO;
+    if(mUser.userId == mGame.playerOne) {
+        myStone = PLAYERONE;
+    }
+    return curBoard.tiles.at(moveFrom) == myStone && mUser.userId == mGame.activePlayer;
+}
+
+std::list<TileEnum> DataHandler::getValidDirectNeighbours(TileEnum kachel) {
+    //TODO: neighbours
+    return std::list<TileEnum>();
+}
+
+std::list<TileEnum> DataHandler::getValidSecondaryNeighbours(TileEnum kachel) {
+    //TODO: neighbours
     return std::list<TileEnum>();
 }
 

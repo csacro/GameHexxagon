@@ -38,7 +38,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
         pos.y = height*0.25+gap/2 + (float)abs(i)/2*tileDelta;
         pos.x = width*0.35+gap/2 + (i+4)*tileDelta;
         for(int j = 1; j <= 9-abs(i); j++) {
-            tileboard.emplace_back( Tile(TileEnum(tileId), pos.x, pos.y, diameter/2) );
+            tileboard.emplace(TileEnum(tileId), Tile(TileEnum(tileId), pos.x, pos.y, diameter/2));
             tileId++;
             pos.y += tileDelta;
         }
@@ -50,8 +50,9 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
 
 
     //Listener
-    for(Tile &t: tileboard) {
-        tileboardClick.emplace_back(OnClickListener(t, tileClickFunction));
+    for(auto &m: tileboard) {
+        auto *tile = &m.second;
+        tileboardClick.emplace_back(OnClickListener(*tile, tileClickFunction));
     }
     leaveClick = OnClickListener(leave, leaveClickFunction);
 
@@ -60,10 +61,13 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
 
 void Gameview::tileClickFunction(Listener *listener) {
     if(mIsTurn) {
+        Tile *mClickedTile = dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement);
         if(isFromSet) {
-            //TODO: validate -> move or reset
+            if(!mToView->move(from->mTileId, mClickedTile->mTileId)) {
+                askForMoveHelp(mClickedTile);
+            }
         } else {
-            //TODO: show move help if own stone on field
+            askForMoveHelp(mClickedTile);
         }
     }
 }
@@ -73,11 +77,13 @@ void Gameview::leaveClickFunction(Listener *listener) {
 }
 
 void Gameview::draw(sf::RenderWindow &renderWindow) {
-    for(Tile &t: tileboard) {
-        t.draw(renderWindow);
-    }
     if(!winner.getText().isEmpty()) {
         winner.draw(renderWindow);
+    } else {
+        for(auto &m: tileboard) {
+            auto *tile = &m.second;
+            tile->draw(renderWindow);
+        }
     }
     playerOneUsername.draw(renderWindow);
     playerTwoUsername.draw(renderWindow);
@@ -103,9 +109,9 @@ void Gameview::displayPlayerNames(std::string playerOneUserName, std::string pla
     sf::String emptyText("");
     winner.setText(emptyText);
 
-    for(Tile t: tileboard) {
-        t.setStoneColor(sf::Color::Transparent);
-        t.setHexagonOutlineColor(sf::Color::Transparent);
+    for(auto m: tileboard) {
+        m.second.setStoneColor(sf::Color::Transparent);
+        m.second.setHexagonOutlineColor(sf::Color::Transparent);
     }
 
     sf::String playerOneText(playerOneUserName);
@@ -144,8 +150,42 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
     }
 }
 
+void Gameview::displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) {
+    for(TileEnum tileEnum: secondaryNeighbours) {
+        tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Yellow);
+    }
+    for(TileEnum tileEnum: directNeighbours) {
+        tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Green);
+    }
+}
+
+void Gameview::clearHelp() {
+    for(auto &m: tileboard) {
+        auto *tile = &m.second;
+        tile->setHexagonOutlineColor(sf::Color::Transparent);
+    }
+}
+
 void Gameview::updateBoard(TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board) {
-    //TODO: updateBoard
+    isFromSet = false;
+
+    for(auto &m: tileboard) {
+        auto *tile = &m.second;
+        switch(board.tiles.at(tile->mTileId)) {
+            case PLAYERONE:
+                tile->setStoneColor(sf::Color::Red);
+                break;
+            case PLAYERTWO:
+                tile->setStoneColor(sf::Color::White);
+                break;
+            case FREE:
+                tile->setStoneColor(sf::Color::Transparent);
+                break;
+            case BLOCKED:
+                tile->isVisible = false;
+                break;
+        }
+    }
 }
 
 void Gameview::displayPlayerPoints(std::string &playerOnePoints, std::string &playerTwoPoints) {
@@ -153,4 +193,11 @@ void Gameview::displayPlayerPoints(std::string &playerOnePoints, std::string &pl
     playerOnepoints.setText(playerOneText);
     sf::String playerTwoText(playerTwoPoints);
     playerTwopoints.setText(playerTwoText);
+}
+
+void Gameview::askForMoveHelp(Tile *tile) {
+    if(mToView->getMoveHelp(tile->mTileId)) {
+        from = tile;
+        isFromSet = true;
+    }
 }

@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <list>
 #include <SFMLComponents/WindowViews/WindowView.h>
 #include "../Model/TileEnum.h"
 #include "../Model/Board.h"
@@ -51,6 +52,18 @@ public:
              TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board,
              bool isTie, bool isWinner)
              = 0;
+    /**
+     * called by ViewHandler to make Gameview able to display help for the current move
+     * (help got requested earlier by Gameview)
+     * @param directNeighbours std::list<TileEnum> containing all direct neighbours tiles of the requested tile to which a move can be made
+     * @param secondaryNeighbours std::list<TileEnum> containing all neighbours of neighbours ot the request tile to which a move can be made
+     */
+    virtual void displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) = 0;
+
+    /**
+     * called by ViewHandler to clear everything that has been drawn by Gameview in order to display help
+     */
+    virtual void clearHelp() = 0;
 };
 
 

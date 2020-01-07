@@ -45,11 +45,15 @@ void ViewHandler::showGameview() {
 
 
 void ViewHandler::connectServer(std::string server) {
-    mToClient->connect(server);
+    if(!mToData->isConnected()) {
+        mToClient->connect(server);
+    }
 }
 
 void ViewHandler::disconnectServer() {
-    mToClient->disconnect(mToData->getUserId());
+    if(mToData->isConnected()) {
+        mToClient->disconnect(mToData->getUserId());
+    }
 }
 
 void ViewHandler::showLobbyoverview() {
@@ -93,7 +97,9 @@ void ViewHandler::showMainmenu() {
 }
 
 void ViewHandler::startGame() {
-    mToClient->startGame(mToData->getUserId(), mToData->getLobbyId());
+    if(mToData->isGameStartable()) {
+        mToClient->startGame(mToData->getUserId(), mToData->getLobbyId());
+    }
 }
 
 void ViewHandler::leaveLobby() {
@@ -101,15 +107,21 @@ void ViewHandler::leaveLobby() {
     showLobbyoverview();
 }
 
-std::list<TileEnum> ViewHandler::getNeighbours(std::list<TileEnum> tiles) {
-    //TODO: getNeighbours for spielfeld
-    return std::list<TileEnum>();
+bool ViewHandler::getMoveHelp(TileEnum tile) {
+    if(mToData->isMoveFromPossible(tile)) {
+        mToGameview->displayHelp(mToData->getValidDirectNeighbours(tile), mToData->getValidSecondaryNeighbours(tile));
+        return true;
+    }
+    return false;
 }
 
-void ViewHandler::move(TileEnum moveFrom, TileEnum moveTo) {
+bool ViewHandler::move(TileEnum moveFrom, TileEnum moveTo) {
+    mToGameview->clearHelp();
     if(mToData->isMoveValid(moveFrom, moveTo)) {
         mToClient->gameMove(mToData->getUserId(), mToData->getGameId(), moveFrom, moveTo);
+        return true;
     }
+    return false;
 }
 
 void ViewHandler::leaveGame(bool sendLeave) {

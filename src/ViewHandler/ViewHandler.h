@@ -56,9 +56,9 @@ public:
 
     void leaveLobby() override;
 
-    std::list<TileEnum> getNeighbours(std::list<TileEnum> tiles) override;
+    bool getMoveHelp(TileEnum tile) override;
 
-    void move(TileEnum moveFrom, TileEnum moveTo) override;
+    bool move(TileEnum moveFrom, TileEnum moveTo) override;
 
     void leaveGame(bool sendLeave) override;
 

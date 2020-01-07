@@ -111,10 +111,24 @@ public:
 
     /**
      *
-     * @param kacheln
+     * @param moveFrom
      * @return
      */
-    virtual std::list<TileEnum> getNeighbours(std::list<TileEnum> kacheln)  = 0;
+    virtual bool isMoveFromPossible(TileEnum moveFrom) = 0;
+
+    /**
+     *
+     * @param kachel
+     * @return
+     */
+    virtual std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel)  = 0;
+
+    /**
+     *
+     * @param kachel
+     * @return
+     */
+    virtual std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) = 0;
 }; //TODO: documentation
 
 

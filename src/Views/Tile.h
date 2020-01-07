@@ -12,11 +12,12 @@
 
 class Tile: virtual public ClickableElement {
 private:
-    TileEnum mTileId; //identification for Tile
     sf::CircleShape mHexagon; //background of the Tile
     sf::CircleShape mStone; //Stone positioned on the Tile
 
 public:
+    TileEnum mTileId; //identification for Tile
+
     /**
      * default Constructor
      */
@@ -42,6 +43,12 @@ public:
      * @param color sf::Color that should be set to mStone
      */
     void setStoneColor(sf::Color color);
+
+    /**
+     * getter for the color of mStone
+     * @return sf::Color that is the color of mStone
+     */
+    sf::Color getStoneColor();
 
     bool isPointInElement(sf::Vector2i point) override;
 

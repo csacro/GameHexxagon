@@ -15,12 +15,17 @@
 
 class DataHandler: public ViewToData, public ClientToData {
 private:
-    DataToView *mToView;
+    DataToView *mToView; //interface to ViewHandler
 
+    //storage of data for user
     User mUser;
     std::list<ModelLobby::Lobby> mAvailableLobbies;
     ModelLobby::Lobby mLobby;
     ModelGame::Game mGame;
+
+    //look up table for direct neighbours
+    std::map<TileEnum, std::list<TileEnum>> neighboursLut;
+    //TODO: neighbours (fill lut)
 
 public:
     /**
@@ -64,8 +69,6 @@ public:
 
     bool isMoveValid(TileEnum moveFrom, TileEnum moveTo) override;
 
-    std::list<TileEnum> getNeighbours(std::list<TileEnum> kacheln) override;
-
     void setUserId(std::string userId) override;
 
     void forwardAvailableLobbies(std::list<ModelLobby::Lobby> lobbies) override;
@@ -79,6 +82,12 @@ public:
     void infoGameStarted() override;
 
     void forwardGameStatus(ModelGame::Game game) override;
+
+    bool isMoveFromPossible(TileEnum moveFrom) override;
+
+    std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel) override;
+
+    std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) override;
 };
 
 

@@ -40,6 +40,10 @@ public:
     void display(std::string playerOnePoints, std::string playerTwoPoints, TileEnum moveFrom, TileEnum moveTo,
                  ModelBoard::Board board, bool isTie, bool isWinner) override;
 
+    void displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) override;
+
+    void clearHelp() override;
+
 private:
     inline static GameviewToView *mToView; //interface to ViewHandler
     inline static bool mIsTurn; //true if it is user's turn
@@ -61,9 +65,15 @@ private:
      */
     void displayPlayerPoints(std::string &playerOnePoints, std::string &playerTwoPoints);
 
+    /**
+     * helper function to ask for move help and set from
+     * @param tile Tile* the user wants to move from
+     */
+    static void askForMoveHelp(Tile *tile);
+
     //Elements
     inline static TextField winner; //TextField to display winner
-    inline static std::list<Tile> tileboard; //Tiles making up the board
+    inline static std::map<TileEnum, Tile> tileboard; //Tiles making up the board
     inline static TextField playerOneUsername; //TextField to display name of playerOne
     inline static TextField playerTwoUsername; //TextField to display name of playerTwo
     inline static TextField playerOnepoints; //TextField to display points of playerOne

@@ -15,18 +15,19 @@
 class GameviewToView {
 public:
     /**
-     * called by Gameview to get to know neighbours of all tiles in paramlist
-     * @param tiles std::list<TileEnum> containing all Tiles Gameview wants to know neighbours of
-     * @return std::list<TileEnum> containing neighbours of all TileEnums in tiles
+     * called by Gameview to make ViewHandler get Data to show help for the move
+     * @param tile TileEnum the Tile Gameview wants to know move options from
+     * @return bool is true when move can be made from tile, else false
      */
-    virtual std::list<TileEnum> getNeighbours(std::list<TileEnum> tiles) = 0;
+    virtual bool getMoveHelp(TileEnum tile) = 0;
 
     /**
      * called after user has decided from which Tile to move to which Tile
      * @param moveFrom TileEnum tile that user moves Stone from
      * @param moveTo TileEnum tile that user moves Stone to
+     * @return bool is true when move can be be made from moveFrom to moveTo, else false
      */
-    virtual void move(TileEnum moveFrom, TileEnum moveTo) = 0;
+    virtual bool move(TileEnum moveFrom, TileEnum moveTo) = 0;
 
     /**
      * called when the user wants to leave the Game
