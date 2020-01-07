@@ -59,39 +59,39 @@ public:
     virtual bool isGameStartable() = 0;
 
     /**
-     * TODO: documentation
-     * @return std::list<std::string>
+     * called when ViewHandler wants to know the lobbyNames of all Lobbies that are joinable at the moment
+     * @return std::list<std::string> lobbyNames of Lobbies that are available and not closed
      */
     virtual std::list<std::string> getJoinableLobbyNames() = 0;
 
     /**
-     * TODO: documentation
-     * @param lobbyName std::string
-     * @return std::string
+     * find Lobby with lobbyName in availableLobbies list and return lobbyId of the Lobby
+     * @param lobbyName std::string lobbyName of the Lobby whose lobbyId is wanted
+     * @return std::string lobbyId of the Lobby with lobbyName in availableLobbies, empty string if no Lobby with lobbyName exists
      */
     virtual std::string getLobbyId(std::string lobbyName) = 0;
 
     /**
-     * TODO: documentation
-     * @return std::list<std::string>
+     * called by ViewHandler to get information about Lobby to hand over to Lobbyview to display
+     * @return std::list<std::string> {lobbyName, playerOneUserName, playerTwoUserName} in Lobby
      */
     virtual std::list<std::string> getLobbyStrings() = 0;
 
     /**
-     * TODO: documentation
-     * @return std::list<std::string>
+     * called by ViewHandler to get information about Game to hand over to Gameview to display
+     * @return std::list<std::string> {playerOnePoints, playerTwoPoints} in Game
      */
     virtual std::list<std::string> getGameStrings()  = 0;
 
     /**
-     * TODO: documentation
-     * @return std::list<bool>
+     * called by ViewHandler to get information about Game to hand over to Gameview to display
+     * @return std::list<bool> if game is over {isTie, isUserWinner}, else {isUserTurn}
      */
     virtual std::list<bool> getGameBooleans()  = 0;
 
     /**
-     * TODO: documentation
-     * @return std::list<TileEnum>
+     * called by ViewHandler to get information about Game to hand over to Gameview to display
+     * @return std::list<TileEnum> {moveFrom, moveTo} in Game
      */
     virtual std::list<TileEnum> getLastMove()  = 0;
 
@@ -102,31 +102,31 @@ public:
     virtual ModelBoard::Board getBoard()  = 0;
 
     /**
-     * TODO: documentation
-     * @param moveFrom TileEnum
-     * @param moveTo TileEnum
-     * @return bool
+     * checks wether move from moveFrom to moveTo is valid or not
+     * @param moveFrom TileEnum from where user wants to move the Stone
+     * @param moveTo TileEnum to where user wants to move the Stone
+     * @return bool is true when move is valid, else false
      */
     virtual bool isMoveValid(TileEnum moveFrom, TileEnum moveTo)  = 0;
 
     /**
-     * TODO: documentation
-     * @param moveFrom TileEnum
-     * @return bool
+     * checks wether move from moveFrom is possible
+     * @param moveFrom TileEnum from where the User wants to move the Stone
+     * @return bool is true when Stone from User is on moveFrom, else false
      */
     virtual bool isMoveFromPossible(TileEnum moveFrom) = 0;
 
     /**
-     * TODO: documentation
-     * @param kachel TileEnum
-     * @return std::list<TileEnum>
+     * called in order to get all direct neighbours of kachel to where a move can be made
+     * @param kachel TileEnum from where the move is going to me made
+     * @return std::list<TileEnum> all direct neighbours with TileStateEnum FREE
      */
     virtual std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel)  = 0;
 
     /**
-     * TODO: documentation
-     * @param kachel TileEnum
-     * @return std::list<TileEnum>
+     * called in order to get all neighbours of neighbours of kachel to where a move can be made
+     * @param kachel TileEnum from where the move is going to me made
+     * @return std::list<TileEnum> all secondary neighbours with TileStateEnum FREE
      */
     virtual std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) = 0;
 };
