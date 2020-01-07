@@ -52,5 +52,5 @@ int main() {
     //todo: SonarQube ???
     //todo: Docker ???
 
-    //TODO: write tests
+    //TODO: write tests (ViewToData)
 }

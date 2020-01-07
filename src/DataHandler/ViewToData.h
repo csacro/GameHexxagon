@@ -17,119 +17,119 @@
 class ViewToData {
 public:
     /**
-     *
-     * @return
+     * getter for user's id
+     * @return std::string userId of User
      */
     virtual std::string getUserId() = 0;
 
     /**
-     *
-     * @return
+     * getter for user's name
+     * @return std::string userName of User
      */
     virtual std::string getUserName() = 0;
 
     /**
-     *
-     * @return
+     * getter for lobby's id
+     * @return std::string lobbyId of Lobby
      */
     virtual std::string getLobbyId() = 0;
 
     /**
-     *
-     * @return
+     * getter for games's id
+     * @return std::string gameId of game
      */
     virtual std::string getGameId() = 0;
 
     /**
-     *
-     * @return
+     * called when ViewHandler wants to know wether Client is connected to server or not
+     * @return bool is true when User (and therefore Client) is connected to server, else false
      */
     virtual bool isConnected() = 0;
 
     /**
-     *
-     * @param userName
+     * setter for user's name
+     * @param userName std::string to be set as userName in User
      */
     virtual void setUserName(std::string userName) = 0;
 
     /**
-     *
-     * @return
+     * called when ViewHandler wants to know if Game is startable by user
+     * @return bool is true when user is allowed to start the Game, else false
      */
     virtual bool isGameStartable() = 0;
 
     /**
-     *
-     * @return
+     * TODO: documentation
+     * @return std::list<std::string>
      */
     virtual std::list<std::string> getJoinableLobbyNames() = 0;
 
     /**
-     *
-     * @param lobbyName
-     * @return
+     * TODO: documentation
+     * @param lobbyName std::string
+     * @return std::string
      */
     virtual std::string getLobbyId(std::string lobbyName) = 0;
 
     /**
-     *
-     * @return
+     * TODO: documentation
+     * @return std::list<std::string>
      */
     virtual std::list<std::string> getLobbyStrings() = 0;
 
     /**
-     *
-     * @return
+     * TODO: documentation
+     * @return std::list<std::string>
      */
     virtual std::list<std::string> getGameStrings()  = 0;
 
     /**
-     *
-     * @return
+     * TODO: documentation
+     * @return std::list<bool>
      */
     virtual std::list<bool> getGameBooleans()  = 0;
 
     /**
-     *
-     * @return
+     * TODO: documentation
+     * @return std::list<TileEnum>
      */
     virtual std::list<TileEnum> getLastMove()  = 0;
 
     /**
-     *
-     * @return
+     * getter for game's board
+     * @return ModelBoard::Board current Board of Game
      */
     virtual ModelBoard::Board getBoard()  = 0;
 
     /**
-     *
-     * @param moveFrom
-     * @param moveTo
-     * @return
+     * TODO: documentation
+     * @param moveFrom TileEnum
+     * @param moveTo TileEnum
+     * @return bool
      */
     virtual bool isMoveValid(TileEnum moveFrom, TileEnum moveTo)  = 0;
 
     /**
-     *
-     * @param moveFrom
-     * @return
+     * TODO: documentation
+     * @param moveFrom TileEnum
+     * @return bool
      */
     virtual bool isMoveFromPossible(TileEnum moveFrom) = 0;
 
     /**
-     *
-     * @param kachel
-     * @return
+     * TODO: documentation
+     * @param kachel TileEnum
+     * @return std::list<TileEnum>
      */
     virtual std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel)  = 0;
 
     /**
-     *
-     * @param kachel
-     * @return
+     * TODO: documentation
+     * @param kachel TileEnum
+     * @return std::list<TileEnum>
      */
     virtual std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) = 0;
-}; //TODO: documentation
+};
 
 
 #endif //GAMEHEXXAGON_VIEWTODATA_H
