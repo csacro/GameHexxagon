@@ -60,8 +60,6 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
 }
 
 void Gameview::tileClickFunction(Listener *listener) {
-    std::cout << "Click" << std::endl;
-    std::cout << dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement)->mTileId << std::endl;
     if(mIsTurn) {
         Tile *mClickedTile = dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement);
         if(isFromSet) {
