@@ -38,7 +38,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
         pos.y = height*0.25+gap/2 + (float)abs(i)/2*tileDelta;
         pos.x = width*0.35+gap/2 + (i+4)*tileDelta;
         for(int j = 1; j <= 9-abs(i); j++) {
-            tileboard.emplace(TileEnum(tileId), Tile(TileEnum(tileId), pos.x, pos.y, diameter/2));
+            tileboard.emplace((TileEnum)tileId, Tile((TileEnum)tileId, pos.x, pos.y, diameter/2));
             tileId++;
             pos.y += tileDelta;
         }
@@ -51,15 +51,17 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
 
     //Listener
     for(auto &m: tileboard) {
-        auto *tile = &m.second;
-        tileboardClick.emplace_back(OnClickListener(*tile, tileClickFunction));
+        tileboardClick.emplace_back(OnClickListener(m.second, tileClickFunction));
     }
     leaveClick = OnClickListener(leave, leaveClickFunction);
+
 
     displayPlayerNames("", "");
 }
 
 void Gameview::tileClickFunction(Listener *listener) {
+    std::cout << "Click" << std::endl;
+    std::cout << dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement)->mTileId << std::endl;
     if(mIsTurn) {
         Tile *mClickedTile = dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement);
         if(isFromSet) {
@@ -81,8 +83,7 @@ void Gameview::draw(sf::RenderWindow &renderWindow) {
         winner.draw(renderWindow);
     } else {
         for(auto &m: tileboard) {
-            auto *tile = &m.second;
-            tile->draw(renderWindow);
+            m.second.draw(renderWindow);
         }
     }
     playerOneUsername.draw(renderWindow);
@@ -93,7 +94,7 @@ void Gameview::draw(sf::RenderWindow &renderWindow) {
 }
 
 void Gameview::listen(sf::Event event, sf::RenderWindow &renderWindow) {
-    for(OnClickListener ocl: tileboardClick) {
+    for(OnClickListener &ocl: tileboardClick) {
         ocl.listen(event, renderWindow);
     }
     leaveClick.listen(event, renderWindow);
@@ -161,8 +162,7 @@ void Gameview::displayHelp(std::list<TileEnum> directNeighbours, std::list<TileE
 
 void Gameview::clearHelp() {
     for(auto &m: tileboard) {
-        auto *tile = &m.second;
-        tile->setHexagonOutlineColor(sf::Color::Transparent);
+        m.second.setHexagonOutlineColor(sf::Color::Transparent);
     }
 }
 
@@ -170,19 +170,18 @@ void Gameview::updateBoard(TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board
     isFromSet = false;
 
     for(auto &m: tileboard) {
-        auto *tile = &m.second;
-        switch(board.tiles.at(tile->mTileId)) {
+        switch(board.tiles.at(m.second.mTileId)) {
             case PLAYERONE:
-                tile->setStoneColor(sf::Color::Red);
+                m.second.setStoneColor(sf::Color::Red);
                 break;
             case PLAYERTWO:
-                tile->setStoneColor(sf::Color::White);
+                m.second.setStoneColor(sf::Color::White);
                 break;
             case FREE:
-                tile->setStoneColor(sf::Color::Transparent);
+                m.second.setStoneColor(sf::Color::Transparent);
                 break;
             case BLOCKED:
-                tile->isVisible = false;
+                m.second.isVisible = false;
                 break;
         }
     }
