@@ -42,7 +42,8 @@ int main() {
     l = Lobbyview(v, arial, lrw.getSize());
     g = Gameview(v, arial, lrw.getSize());
 
-    lrw.run(sf::Color::Cyan);
+
+    lrw.run(sf::Color(192, 192, 192));
 
     exit(0);
 
