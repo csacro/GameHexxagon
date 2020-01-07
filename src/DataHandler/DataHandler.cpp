@@ -4,7 +4,6 @@
 
 #include <string>
 #include "DataHandler.h"
-#include "../Model/Board.h"
 
 
 DataHandler::DataHandler(DataToView &dtv) {
@@ -113,13 +112,32 @@ bool DataHandler::isMoveFromPossible(TileEnum moveFrom) {
 }
 
 std::list<TileEnum> DataHandler::getValidDirectNeighbours(TileEnum kachel) {
-    //TODO: neighbours
-    return std::list<TileEnum>();
+    std::list<TileEnum> directNeighbours = neighboursLut.at(kachel);
+    for(auto it = directNeighbours.begin(); it != directNeighbours.end(); it++) {
+        if(!isMoveToPossible(*it)) {
+            directNeighbours.erase(it);
+        }
+    }
+    return directNeighbours;
 }
 
 std::list<TileEnum> DataHandler::getValidSecondaryNeighbours(TileEnum kachel) {
-    //TODO: neighbours
+    auto directNeighbours = neighboursLut.at(kachel);
+    std::list<TileEnum> secondaryNeighbours;
+    for(TileEnum te: directNeighbours) {
+        secondaryNeighbours.splice(secondaryNeighbours.end(), neighboursLut.at(te));
+    }
+    for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
+        if(!isMoveToPossible(*it) || std::find(directNeighbours.begin(), directNeighbours.end(), *it) != directNeighbours.end()) {
+            secondaryNeighbours.erase(it);
+        }
+    }
     return std::list<TileEnum>();
+}
+
+bool DataHandler::isMoveToPossible(TileEnum tileEnum) {
+    ModelBoard::Board b = mGame.board;
+    return b.tiles.at(tileEnum) == FREE;
 }
 
 
