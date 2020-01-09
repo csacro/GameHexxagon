@@ -33,6 +33,7 @@ bool DataHandler::isConnected() {
 
 void DataHandler::setUserName(std::string userName) {
     mUser.userName = userName;
+    mUser.isConnected = !userName.empty();
 }
 
 bool DataHandler::isGameStartable() {

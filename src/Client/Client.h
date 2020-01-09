@@ -8,11 +8,18 @@
 
 #include "ViewToClient.h"
 #include "../DataHandler/ClientToData.h"
+#include <SopraNetwork/WebSocketClient.hpp>
 
 class Client: public ViewToClient {
-//TODO: COMPLETE CLASS + INCLUDE WEBSOCKET-API
 private:
-    ClientToData *mToData;
+    ClientToData *mToData; //interface to DataHandler
+    std::optional<network::WebSocketClient> mWebSocketClient; //Connection to Server
+
+    /**
+     * function to handle received messages
+     * @param message std::string received message from server
+     */
+    void onReceiveMessage(std::string message);
 
 public:
     /**
@@ -42,7 +49,7 @@ public:
 
     void leaveGame(std::string userId, std::string gameId) override;
 
-    void disconnect(std::string userId) override;
+    void disconnect() override;
 };
 
 

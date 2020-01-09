@@ -30,12 +30,11 @@ int main() {
     Gameview g;
 
     DataHandler d;
-    Client c;
+    ViewHandler v;
 
-    ViewHandler v(lrw, m, lo, l, g, d, c);
-
+    Client c(d);
+    v = ViewHandler(lrw, m, lo, l, g, d, c);
     d = DataHandler(v);
-    c = Client(d);
 
     m = Mainmenu(v, arial, lrw.getSize());
     lo = Lobbyoverview(v, arial, lrw.getSize());
@@ -46,12 +45,4 @@ int main() {
     lrw.run(sf::Color(192, 192, 192));
 
     exit(0);
-
-    //TODO: Thread for Client !?!?!?
-
-    //todo: Doxygen ???
-    //todo: SonarQube ???
-    //todo: Docker ???
-
-    //TODO: write tests (ViewToData and from_json)
 }

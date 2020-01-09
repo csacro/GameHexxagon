@@ -73,9 +73,8 @@ public:
 
     /**
      * called in order to close the connection to the server
-     * @param userId std::string userId of the User
      */
-    virtual void disconnect(std::string userId) = 0;
+    virtual void disconnect() = 0;
 
 };
 

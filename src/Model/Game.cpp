@@ -17,8 +17,8 @@ namespace ModelGame {
         game.playerTwoPoints = j.at("playerTwoPoints");
         game.board = j.at("board").get<ModelBoard::Board>();
         game.turn = j.at("turn").get<bool>();
-        game.lastMoveFrom = j.at("lastMoveFrom").get<TileEnum>();
-        game.lastMoveTo = j.at("lastMoveTo").get<TileEnum>();
+        game.lastMoveFrom = (TileEnum)(std::stoi(j.at("lastMoveFrom").get<std::string>()) -1);
+        game.lastMoveTo = (TileEnum)(std::stoi(j.at("lastMoveTo").get<std::string>()) -1);
         game.activePlayer = j.at("activePlayer").get<std::string>();
         game.tie = j.at("tie").get<bool>();
         game.winner = j.at("winner").get<std::string>();

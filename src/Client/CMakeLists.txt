@@ -8,4 +8,4 @@ add_library(src_Client
         Client.cpp Client.h
         MessageType.h)
 
-target_link_libraries(src_Client SopraNetwork)
+target_link_libraries(src_Client websockets SopraNetwork)

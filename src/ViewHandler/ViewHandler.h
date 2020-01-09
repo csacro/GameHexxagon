@@ -23,6 +23,11 @@ class ViewHandler: public MainmenuToView, public LobbyoverviewToView, public Lob
                     public DataToView {
 public:
     /**
+     * default Constructor
+     */
+     ViewHandler() = default;
+
+    /**
      * Constructor
      * @param renderWindow sf::RenderWindow in which Views are rendered
      * @param vtm ViewToMainmenu to communicate with Mainmenu

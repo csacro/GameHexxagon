@@ -18,8 +18,7 @@ ViewHandler::ViewHandler(ListenerRenderWindow &listenerRenderWindow,
     mToData = &vtd;
     mToClient = &vtc;
 
-    //showMainmenu();
-    showGameview();
+    showMainmenu();
 }
 
 void ViewHandler::showLobbyview() {
@@ -52,7 +51,7 @@ void ViewHandler::connectServer(std::string server) {
 
 void ViewHandler::disconnectServer() {
     if(mToData->isConnected()) {
-        mToClient->disconnect(mToData->getUserId());
+        mToClient->disconnect();
     }
 }
 
@@ -68,7 +67,7 @@ void ViewHandler::showLobbyoverview() {
 
 void ViewHandler::close() {
     if(mToData->isConnected()) {
-        mToClient->disconnect(mToData->getUserId());
+        mToClient->disconnect();
     }
     mWindow->close();
 }
