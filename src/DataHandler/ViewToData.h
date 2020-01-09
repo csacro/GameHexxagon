@@ -96,7 +96,7 @@ public:
     virtual std::list<TileEnum> getLastMove()  = 0;
 
     /**
-     * getter for game's board
+     * called by ViewHandler to get information about Game to hand over to Gameview to display
      * @return ModelBoard::Board current Board of Game
      */
     virtual ModelBoard::Board getBoard()  = 0;
