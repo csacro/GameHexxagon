@@ -25,9 +25,7 @@ namespace ModelBoard {
      * @param j nlohmann::json containing Board as JSON
      * @param board struct Board that is getting initialised by j
      */
-    /*TODO void from_json(const nlohmann::json &j, struct Board &board) {
-        board.tiles = j.at("tiles").get<std::map<TileEnum, TileStateEnum>>();
-    }*/
+    void from_json(const nlohmann::json &j, struct Board &board);
 
 } //namespace ModelBoard
 
