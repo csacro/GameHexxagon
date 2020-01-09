@@ -10,7 +10,7 @@
 #include "../DataHandler/ClientToData.h"
 
 class Client: public ViewToClient {
-//TODO: COMPLETE CLASS + FIND WEBSOCKET-API
+//TODO: COMPLETE CLASS + INCLUDE WEBSOCKET-API
 private:
     ClientToData *mToData;
 

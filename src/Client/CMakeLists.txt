@@ -7,3 +7,5 @@ add_library(src_Client
         ViewToClient.h
         Client.cpp Client.h
         MessageType.h)
+
+target_link_libraries(src_Client SopraNetwork)
