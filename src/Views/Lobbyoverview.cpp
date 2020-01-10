@@ -15,11 +15,11 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
 
     //Elements
     sf::Vector2i pos(width*0.45, height*0.33);
-    sf::String usernameDefaultText("unknown User");
+    sf::String usernameDefaultText("unknownUser");
     userName = EditField(pos, usernameDefaultText, font, 0, 0);
 
     pos.y = height*0.43;
-    sf::String lobbynameDefaultText("unknown Lobby");
+    sf::String lobbynameDefaultText("unknownLobby");
     lobbyName = EditField(pos, lobbynameDefaultText, font, 0, 0);
 
     pos.x = width*0.66;
