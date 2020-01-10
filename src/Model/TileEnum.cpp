@@ -6,7 +6,7 @@
 
 namespace ModelTileEnum {
     std::string TileEnumToString(TileEnum tileEnum) {
-        return "Tile_" + std::to_string(tileEnum + 1);
+        return "TILE_" + std::to_string(tileEnum + 1);
     }
 
     TileEnum StringToTileEnum(std::string s) {
