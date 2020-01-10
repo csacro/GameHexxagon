@@ -14,7 +14,7 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     sf::String initText("");
 
     //Elements
-    sf::Vector2i pos(width*0.45, height*0.33);
+    sf::Vector2i pos(width*0.45, height*0.23);
     sf::String usernameDefaultText("unknownUser");
     userName = EditField(pos, usernameDefaultText, font, 0, 0);
 
@@ -23,15 +23,15 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     lobbyName = EditField(pos, lobbynameDefaultText, font, 0, 0);
 
     pos.x = width*0.66;
-    pos.y = height*0.355;
+    pos.y = height*0.28;
     sf::String createandjoinText("CREATE AND JOIN");
     createAndJoin = Button(pos, createandjoinText, font, 0, 0);
 
-    pos.y = height*0.405;
+    pos.y = height*0.38;
     sf::String joinText("JOIN");
     join = Button(pos, joinText, font, 0, 0);
 
-    pos.y = height*0.5;
+    pos.y = height*0.53;
     sf::String updateText("UPDATE");
     update = Button(pos, updateText, font, 0, 0);
 

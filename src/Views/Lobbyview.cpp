@@ -16,10 +16,10 @@ Lobbyview::Lobbyview(LobbyviewToView &ltv, sf::Font &font, sf::Vector2u windowSi
     sf::Vector2i pos(width*0.45, height*0.45);
     lobbyname = TextField(pos, initText, font, 0, 0);
 
-    pos.y = height*0.5;
+    pos.y = height*0.55;
     playerOneUsername = TextField(pos, initText, font, 0, 0);
 
-    pos.y = height*0.55;
+    pos.y = height*0.65;
     playerTwoUsername = TextField(pos, initText, font, 0, 0);
 
     pos.x = width*0.9;

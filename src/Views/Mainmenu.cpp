@@ -2,6 +2,7 @@
  * @author Carolin Schindler
  */
 
+#include <iostream>
 #include "Mainmenu.h"
 
 Mainmenu::Mainmenu(MainmenuToView &mtv, sf::Font &font, sf::Vector2u windowSize) {
@@ -16,7 +17,7 @@ Mainmenu::Mainmenu(MainmenuToView &mtv, sf::Font &font, sf::Vector2u windowSize)
     sf::String serverDefaultText("localhost:4444");
     server = EditField(pos, serverDefaultText, font, 0, 0);
 
-    pos.y = height*0.5;
+    pos.y = height*0.55;
     connection = Button(pos, initText, font, 0, 0);
 
     pos.x = width*0.9;

@@ -26,16 +26,16 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     pos.y = height*0.2;
     playerTwopoints = TextField(pos, initText, font, 0, 0);
 
-    pos.y = height*0.25;
+    pos.y = height*0.15;
     pos.x = width*0.35;
-    winner = TextField(pos, initText, font, 0.6*height, 0.6*height);
+    winner = TextField(pos, initText, font, 0.7*height, 0.7*height);
 
-    float diameter = 0.5*height/9;
+    float diameter = 0.6*height/9;
     float gap = 0.1*height/9;
     float tileDelta = diameter + gap;
     int tileId = 0;
     for(int i = -4; i <= 4; i++) {
-        pos.y = height*0.25+gap/2 + (float)abs(i)/2*tileDelta;
+        pos.y = height*0.15+gap/2 + (float)abs(i)/2*tileDelta;
         pos.x = width*0.35+gap/2 + (i+4)*tileDelta;
         for(int j = 1; j <= 9-abs(i); j++) {
             tileboard.emplace((ModelTileEnum::TileEnum)tileId, Tile((ModelTileEnum::TileEnum)tileId, pos.x, pos.y, diameter/2));
