@@ -23,12 +23,12 @@ Lobbyview::Lobbyview(LobbyviewToView &ltv, sf::Font &font, sf::Vector2u windowSi
     pos.y = height*0.65;
     playerTwoUsername = TextField(pos, initText, font, 0, 0);
 
-    pos.x = width*0.9;
+    pos.x = width*0.8;
     pos.y = height*0.9;
     sf::String startText("START GAME");
     start = Button(pos, startText, font, 0, 0);
 
-    pos.x = width*0.8;
+    pos.x = width*0.6;
     sf::String leaveText("LEAVE LOBBY");
     leave = Button(pos, leaveText, font, 0, 0);
 
