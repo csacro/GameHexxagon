@@ -38,7 +38,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
         pos.y = height*0.25+gap/2 + (float)abs(i)/2*tileDelta;
         pos.x = width*0.35+gap/2 + (i+4)*tileDelta;
         for(int j = 1; j <= 9-abs(i); j++) {
-            tileboard.emplace((TileEnum)tileId, Tile((TileEnum)tileId, pos.x, pos.y, diameter/2));
+            tileboard.emplace((ModelTileEnum::TileEnum)tileId, Tile((ModelTileEnum::TileEnum)tileId, pos.x, pos.y, diameter/2));
             tileId++;
             pos.y += tileDelta;
         }
@@ -119,7 +119,7 @@ void Gameview::displayPlayerNames(std::string playerOneUserName, std::string pla
     playerTwoUsername.setText(playerTwoText);
 }
 
-void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints, TileEnum moveFrom, TileEnum moveTo,
+void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo,
                        ModelBoard::Board board, bool isTurn) {
     displayPlayerPoints(playerOnePoints, playerTwoPoints);
 
@@ -128,7 +128,7 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
     mIsTurn = isTurn;
 }
 
-void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints, TileEnum moveFrom, TileEnum moveTo,
+void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo,
                        ModelBoard::Board board, bool isTie, bool isWinner) {
     sf::String leaveText("CLOSE");
     leave.setText(leaveText);
@@ -149,11 +149,11 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
     }
 }
 
-void Gameview::displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) {
-    for(TileEnum tileEnum: secondaryNeighbours) {
+void Gameview::displayHelp(std::list<ModelTileEnum::TileEnum> directNeighbours, std::list<ModelTileEnum::TileEnum> secondaryNeighbours) {
+    for(ModelTileEnum::TileEnum tileEnum: secondaryNeighbours) {
         tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Yellow);
     }
-    for(TileEnum tileEnum: directNeighbours) {
+    for(ModelTileEnum::TileEnum tileEnum: directNeighbours) {
         tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Green);
     }
 }
@@ -164,21 +164,21 @@ void Gameview::clearHelp() {
     }
 }
 
-void Gameview::updateBoard(TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board) {
+void Gameview::updateBoard(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo, ModelBoard::Board board) {
     isFromSet = false;
 
     for(auto &m: tileboard) {
         switch(board.tiles.at(m.second.mTileId)) {
-            case PLAYERONE:
+            case ModelTileStateEnum::PLAYERONE:
                 m.second.setStoneColor(sf::Color::Red);
                 break;
-            case PLAYERTWO:
+            case ModelTileStateEnum::PLAYERTWO:
                 m.second.setStoneColor(sf::Color::White);
                 break;
-            case FREE:
+            case ModelTileStateEnum::FREE:
                 m.second.setStoneColor(sf::Color::Transparent);
                 break;
-            case BLOCKED:
+            case ModelTileStateEnum::BLOCKED:
                 m.second.isVisible = false;
                 break;
         }

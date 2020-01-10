@@ -62,7 +62,7 @@ public:
      * @param moveFrom TileEnum
      * @param moveTo TileEnum
      */
-    virtual void gameMove(std::string userId, std::string gameId, TileEnum moveFrom, TileEnum moveTo) = 0;
+    virtual void gameMove(std::string userId, std::string gameId, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) = 0;
 
     /**
      * called in order to send a message to the server notifying it that user has left Game

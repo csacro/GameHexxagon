@@ -7,7 +7,6 @@
 
 
 #include <list>
-#include "../Model/TileEnum.h"
 
 /**
  * interface to ViewHandler used by Gameview
@@ -16,18 +15,18 @@ class GameviewToView {
 public:
     /**
      * called by Gameview to make ViewHandler get Data to show help for the move
-     * @param tile TileEnum the Tile Gameview wants to know move options from
+     * @param tile ModelTileEnum::TileEnum the Tile Gameview wants to know move options from
      * @return bool is true when move can be made from tile, else false
      */
-    virtual bool getMoveHelp(TileEnum tile) = 0;
+    virtual bool getMoveHelp(ModelTileEnum::TileEnum tile) = 0;
 
     /**
      * called after user has decided from which Tile to move to which Tile
-     * @param moveFrom TileEnum tile that user moves Stone from
-     * @param moveTo TileEnum tile that user moves Stone to
+     * @param moveFrom ModelTileEnum::TileEnum tile that user moves Stone from
+     * @param moveTo ModelTileEnum::TileEnum tile that user moves Stone to
      * @return bool is true when move can be be made from moveFrom to moveTo, else false
      */
-    virtual bool move(TileEnum moveFrom, TileEnum moveTo) = 0;
+    virtual bool move(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) = 0;
 
     /**
      * called when the user wants to leave the Game

@@ -26,8 +26,8 @@ namespace ModelGame {
         int playerTwoPoints; //number of stones belonging to playerTwo
         ModelBoard::Board board; //current Board in Game
         int turn; //number of current round
-        TileEnum lastMoveFrom; //last stone was moved from there
-        TileEnum lastMoveTo; //last stone was moved there
+        ModelTileEnum::TileEnum lastMoveFrom; //last stone was moved from there
+        ModelTileEnum::TileEnum lastMoveTo; //last stone was moved there
         std::string activePlayer; //id of player who makes next move
         bool tie; //true if neither playerOne nor playerTwo has won
         std::string winner; //id of player who has won

@@ -10,13 +10,8 @@ Client::Client(ClientToData &ctd) {
 }
 
 void Client::onReceiveMessage(std::string message) {
-
-    std::cout << message << std::endl;
-
     auto json = nlohmann::json::parse(message);
-    MessageType messageType = messagetypeMapper.at(json.at("messageType").get<std::string>());
-
-    std::cout << messageType << std::endl;
+    MessageType messageType = json.get<MessageType>();
 
     switch(messageType) {
         case Welcome:
@@ -60,14 +55,14 @@ void Client::connect(std::string server) {
 
 void Client::getAvailableLobbies(std::string userId) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(GetAvailableLobbies);
+    j = GetAvailableLobbies;
     j["userId"] = userId;
     mWebSocketClient->send(j.dump());
 }
 
 void Client::createNewLobby(std::string userId, std::string lobbyName) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(CreateNewLobby);
+    j = CreateNewLobby;
     j["userId"] = userId;
     j["lobbyName"] = lobbyName;
     mWebSocketClient->send(j.dump());
@@ -75,7 +70,7 @@ void Client::createNewLobby(std::string userId, std::string lobbyName) {
 
 void Client::joinLobby(std::string userId, std::string lobbyId, std::string userName) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(JoinLobby);
+    j = JoinLobby;
     j["userId"] = userId;
     j["lobbyId"] = lobbyId;
     j["userName"] = userName;
@@ -84,7 +79,7 @@ void Client::joinLobby(std::string userId, std::string lobbyId, std::string user
 
 void Client::leaveLobby(std::string userId, std::string lobbyId) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(LeaveLobby);
+    j = LeaveLobby;
     j["userId"] = userId;
     j["lobbyId"] = lobbyId;
     mWebSocketClient->send(j.dump());
@@ -92,25 +87,25 @@ void Client::leaveLobby(std::string userId, std::string lobbyId) {
 
 void Client::startGame(std::string userId, std::string lobbyId) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(StartGame);
+    j = StartGame;
     j["userId"] = userId;
     j["lobbyId"] = lobbyId;
     mWebSocketClient->send(j.dump());
 }
 
-void Client::gameMove(std::string userId, std::string gameId, TileEnum moveFrom, TileEnum moveTo) {
+void Client::gameMove(std::string userId, std::string gameId, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(GameMove);
+    j = GameMove;
     j["userId"] = userId;
     j["gameId"] = gameId;
-    j["moveFrom"] = "Tile_" + std::to_string(moveFrom);
-    j["moveTo"] = "Tile_"  + std::to_string(moveTo);
+    j["moveFrom"] = ModelTileEnum::TileEnumToString(moveFrom);
+    j["moveTo"] = ModelTileEnum::TileEnumToString(moveTo);
     mWebSocketClient->send(j.dump());
 }
 
 void Client::leaveGame(std::string userId, std::string gameId) {
     nlohmann::json j;
-    j["messageType"] = messageTypeToString(LeaveGame);
+    j = LeaveGame;
     j["userId"] = userId;
     j["gameId"] = gameId;
     mWebSocketClient->send(j.dump());

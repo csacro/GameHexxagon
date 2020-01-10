@@ -18,11 +18,11 @@ namespace ModelGame {
         game.board = j.at("board").get<ModelBoard::Board>();
         game.turn = j.at("turn").get<bool>();
         if(j.find("lastMoveFrom") != j.end()) {
-            game.lastMoveFrom = (TileEnum) (std::stoi(j.at("lastMoveFrom").get<std::string>()) - 1);
-            game.lastMoveTo = (TileEnum) (std::stoi(j.at("lastMoveTo").get<std::string>()) - 1);
+            game.lastMoveFrom = (ModelTileEnum::TileEnum) (std::stoi(j.at("lastMoveFrom").get<std::string>()) - 1);
+            game.lastMoveTo = (ModelTileEnum::TileEnum) (std::stoi(j.at("lastMoveTo").get<std::string>()) - 1);
         } else {
-            game.lastMoveFrom = TILE_1;
-            game.lastMoveTo = TILE_1;
+            game.lastMoveFrom = ModelTileEnum::TILE_1;
+            game.lastMoveTo = ModelTileEnum::TILE_1;
         }
         game.activePlayer = j.at("activePlayer").get<std::string>();
         game.tie = j.at("tie").get<bool>();

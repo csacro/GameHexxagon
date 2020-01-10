@@ -16,7 +16,7 @@ private:
     sf::CircleShape mStone; //Stone positioned on the Tile
 
 public:
-    TileEnum mTileId; //identification for Tile
+    ModelTileEnum::TileEnum mTileId; //identification for Tile
 
     /**
      * default Constructor
@@ -25,12 +25,12 @@ public:
 
     /**
      * Constructor
-     * @param id TileEnum that identifies Tile uniquely
+     * @param id ModelTileEnum::TileEnum that identifies Tile uniquely
      * @param posx float x-position of upper left corner of mHexagon
      * @param posy float y-position of upper left corner of mHexagon
      * @param radius float radius of mHexagon
      */
-    Tile(TileEnum id, float posx, float posy, float radius);
+    Tile(ModelTileEnum::TileEnum id, float posx, float posy, float radius);
 
     /**
      * changes the color of the Outline of mHexagon

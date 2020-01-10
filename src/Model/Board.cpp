@@ -6,6 +6,12 @@
 
 namespace ModelBoard {
     void from_json(const nlohmann::json &j, struct Board &board) {
-        //TODO (no json for Tile(State)Enum): board.tiles = j.at("tiles").get<std::map<TileEnum, TileStateEnum>>();
+        ModelTileEnum::TileEnum te;
+        ModelTileStateEnum::TileStateEnum tse;
+        for(int i = 1; i <= 61; i++) {
+            te = ModelTileEnum::StringToTileEnum(std::to_string(i));
+            tse = ModelTileStateEnum::tilestateenumMapper.at(j.at(TileEnumToString(te)).get<std::string>());
+            board.tiles.emplace(te, tse);
+        }
     }
 }  //namespace ModelBoard

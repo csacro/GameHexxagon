@@ -17,7 +17,7 @@ namespace ModelBoard {
      * struct for Board data
      */
     struct Board {
-        std::map<TileEnum, TileStateEnum> tiles; //mapping tile to its state
+        std::map<ModelTileEnum::TileEnum, ModelTileStateEnum::TileStateEnum> tiles; //mapping tile to its state
     };
 
     /**

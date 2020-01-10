@@ -45,7 +45,7 @@ public:
 
     void startGame(std::string userId, std::string lobbyId) override;
 
-    void gameMove(std::string userId, std::string gameId, TileEnum moveFrom, TileEnum moveTo) override;
+    void gameMove(std::string userId, std::string gameId, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) override;
 
     void leaveGame(std::string userId, std::string gameId) override;
 

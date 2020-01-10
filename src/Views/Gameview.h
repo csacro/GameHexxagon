@@ -34,13 +34,13 @@ public:
 
     void displayPlayerNames(std::string playerOneUserName, std::string playerTwoUserName) override;
 
-    void display(std::string playerOnePoints, std::string playerTwoPoints, TileEnum moveFrom, TileEnum moveTo,
+    void display(std::string playerOnePoints, std::string playerTwoPoints, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo,
                  ModelBoard::Board board, bool isTurn) override;
 
-    void display(std::string playerOnePoints, std::string playerTwoPoints, TileEnum moveFrom, TileEnum moveTo,
+    void display(std::string playerOnePoints, std::string playerTwoPoints, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo,
                  ModelBoard::Board board, bool isTie, bool isWinner) override;
 
-    void displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) override;
+    void displayHelp(std::list<ModelTileEnum::TileEnum> directNeighbours, std::list<ModelTileEnum::TileEnum> secondaryNeighbours) override;
 
     void clearHelp() override;
 
@@ -52,11 +52,11 @@ private:
 
     /**
      * helper function to display the move and the current board
-     * @param moveFrom TileEnum from which last Stone was moved
-     * @param moveTo TileEnum to which last Stone was moved
+     * @param moveFrom ModelTileEnum::TileEnum from which last Stone was moved
+     * @param moveTo ModelTileEnum::TileEnum to which last Stone was moved
      * @param board Board after last Stone was moved
      */
-    void updateBoard(TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board);
+    void updateBoard(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo, ModelBoard::Board board);
 
     /**
      * helper function to display the Points of playerOne and playerTwo
@@ -73,7 +73,7 @@ private:
 
     //Elements
     inline static TextField winner; //TextField to display winner
-    inline static std::map<TileEnum, Tile> tileboard; //Tiles making up the board
+    inline static std::map<ModelTileEnum::TileEnum, Tile> tileboard; //Tiles making up the board
     inline static TextField playerOneUsername; //TextField to display name of playerOne
     inline static TextField playerTwoUsername; //TextField to display name of playerTwo
     inline static TextField playerOnepoints; //TextField to display points of playerOne

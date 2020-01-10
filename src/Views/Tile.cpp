@@ -6,7 +6,7 @@
 #include "Tile.h"
 
 
-Tile::Tile(TileEnum id, float posx, float posy, float radius) {
+Tile::Tile(ModelTileEnum::TileEnum id, float posx, float posy, float radius) {
     mTileId = id;
 
     mHexagon.setPointCount(6);

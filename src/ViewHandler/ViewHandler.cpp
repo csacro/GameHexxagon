@@ -106,7 +106,7 @@ void ViewHandler::leaveLobby() {
     showLobbyoverview();
 }
 
-bool ViewHandler::getMoveHelp(TileEnum tile) {
+bool ViewHandler::getMoveHelp(ModelTileEnum::TileEnum tile) {
     if(mToData->isMoveFromPossible(tile)) {
         mToGameview->displayHelp(mToData->getValidDirectNeighbours(tile), mToData->getValidSecondaryNeighbours(tile));
         return true;
@@ -114,7 +114,7 @@ bool ViewHandler::getMoveHelp(TileEnum tile) {
     return false;
 }
 
-bool ViewHandler::move(TileEnum moveFrom, TileEnum moveTo) {
+bool ViewHandler::move(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) {
     mToGameview->clearHelp();
     if(mToData->isMoveValid(moveFrom, moveTo)) {
         mToClient->gameMove(mToData->getUserId(), mToData->getGameId(), moveFrom, moveTo);
@@ -171,7 +171,7 @@ void ViewHandler::infoGameStarted() {
 void ViewHandler::gotGameStatus() {
     std::list<std::string> gamestrings = mToData->getGameStrings();
     std::list<bool> gamebools = mToData->getGameBooleans();
-    std::list<TileEnum> lastmove = mToData->getLastMove();
+    std::list<ModelTileEnum::TileEnum> lastmove = mToData->getLastMove();
     ModelBoard::Board board = mToData->getBoard();
     if(gamebools.size() == 1) {
         mToGameview->display(*gamestrings.begin(), *gamestrings.end(), *lastmove.begin(), *lastmove.end(), board, *gamebools.begin());

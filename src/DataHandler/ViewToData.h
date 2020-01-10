@@ -91,9 +91,9 @@ public:
 
     /**
      * called by ViewHandler to get information about Game to hand over to Gameview to display
-     * @return std::list<TileEnum> {moveFrom, moveTo} in Game
+     * @return std::list<ModelTileEnum::TileEnum > {moveFrom, moveTo} in Game
      */
-    virtual std::list<TileEnum> getLastMove()  = 0;
+    virtual std::list<ModelTileEnum::TileEnum > getLastMove()  = 0;
 
     /**
      * called by ViewHandler to get information about Game to hand over to Gameview to display
@@ -103,32 +103,32 @@ public:
 
     /**
      * checks wether move from moveFrom to moveTo is valid or not
-     * @param moveFrom TileEnum from where user wants to move the Stone
-     * @param moveTo TileEnum to where user wants to move the Stone
+     * @param moveFrom ModelTileEnum::TileEnum from where user wants to move the Stone
+     * @param moveTo ModelTileEnum::TileEnum to where user wants to move the Stone
      * @return bool is true when move is valid, else false
      */
-    virtual bool isMoveValid(TileEnum moveFrom, TileEnum moveTo)  = 0;
+    virtual bool isMoveValid(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo)  = 0;
 
     /**
      * checks wether move from moveFrom is possible
-     * @param moveFrom TileEnum from where the User wants to move the Stone
+     * @param moveFrom ModelTileEnum::TileEnum from where the User wants to move the Stone
      * @return bool is true when Stone from User is on moveFrom, else false
      */
-    virtual bool isMoveFromPossible(TileEnum moveFrom) = 0;
+    virtual bool isMoveFromPossible(ModelTileEnum::TileEnum moveFrom) = 0;
 
     /**
      * called in order to get all direct neighbours of kachel to where a move can be made
-     * @param kachel TileEnum from where the move is going to me made
-     * @return std::list<TileEnum> all direct neighbours with TileStateEnum FREE
+     * @param kachel ModelTileEnum::TileEnum from where the move is going to me made
+     * @return std::list<ModelTileEnum::TileEnum > all direct neighbours with TileStateEnum FREE
      */
-    virtual std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel)  = 0;
+    virtual std::list<ModelTileEnum::TileEnum > getValidDirectNeighbours(ModelTileEnum::TileEnum kachel)  = 0;
 
     /**
      * called in order to get all neighbours of neighbours of kachel to where a move can be made
-     * @param kachel TileEnum from where the move is going to me made
-     * @return std::list<TileEnum> all secondary neighbours with TileStateEnum FREE
+     * @param kachel ModelTileEnum::TileEnum from where the move is going to me made
+     * @return std::list<ModelTileEnum::TileEnum > all secondary neighbours with TileStateEnum FREE
      */
-    virtual std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) = 0;
+    virtual std::list<ModelTileEnum::TileEnum > getValidSecondaryNeighbours(ModelTileEnum::TileEnum kachel) = 0;
 };
 
 

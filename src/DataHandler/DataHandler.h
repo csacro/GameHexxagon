@@ -23,68 +23,68 @@ private:
     ModelGame::Game mGame;
 
     //look up table for direct neighbours
-    std::map<TileEnum, std::list<TileEnum>> neighboursLut = {
-            {TILE_1, {TILE_2, TILE_6, TILE_7}},
-            {TILE_2, {TILE_1, TILE_3, TILE_7, TILE_7, TILE_8}},
-            {TILE_3, {TILE_2, TILE_4, TILE_8, TILE_8, TILE_9}},
-            {TILE_4, {TILE_3, TILE_5, TILE_9, TILE_9, TILE_10}},
-            {TILE_5, {TILE_4, TILE_10, TILE_10, TILE_11}},
-            {TILE_6, {TILE_7, TILE_1, TILE_12, TILE_13}},
-            {TILE_7, {TILE_6, TILE_8, TILE_1, TILE_2, TILE_13, TILE_14}},
-            {TILE_8, {TILE_7, TILE_9, TILE_2, TILE_3, TILE_14, TILE_15}},
-            {TILE_9, {TILE_8, TILE_10, TILE_3, TILE_4, TILE_15, TILE_16}},
-            {TILE_10, {TILE_9, TILE_11, TILE_4, TILE_5, TILE_16, TILE_17}},
-            {TILE_11, {TILE_10, TILE_5, TILE_17, TILE_18}},
-            {TILE_12, {TILE_13, TILE_6, TILE_19, TILE_20}},
-            {TILE_13, {TILE_12, TILE_14, TILE_6, TILE_7, TILE_20, TILE_21}},
-            {TILE_14, {TILE_13, TILE_15, TILE_7, TILE_8, TILE_21, TILE_22}},
-            {TILE_15, {TILE_14, TILE_16, TILE_8, TILE_9, TILE_22, TILE_23}},
-            {TILE_16, {TILE_15, TILE_17, TILE_9, TILE_10, TILE_23, TILE_24}},
-            {TILE_17, {TILE_16, TILE_18, TILE_10, TILE_11, TILE_24, TILE_25}},
-            {TILE_18, {TILE_17, TILE_11, TILE_25, TILE_26}},
-            {TILE_19, {TILE_20, TILE_12, TILE_27, TILE_28}},
-            {TILE_20, {TILE_19, TILE_21, TILE_12, TILE_13, TILE_28, TILE_29}},
-            {TILE_21, {TILE_20, TILE_22, TILE_13, TILE_14, TILE_29, TILE_30}},
-            {TILE_22, {TILE_21, TILE_23, TILE_14, TILE_15, TILE_30, TILE_31}},
-            {TILE_23, {TILE_22, TILE_24, TILE_15, TILE_16, TILE_31, TILE_32}},
-            {TILE_24, {TILE_23, TILE_25, TILE_16, TILE_17, TILE_32, TILE_33}},
-            {TILE_25, {TILE_24, TILE_26, TILE_17, TILE_18, TILE_33, TILE_34}},
-            {TILE_26, {TILE_25, TILE_18, TILE_34, TILE_35}},
-            {TILE_27, {TILE_28, TILE_19, TILE_36}},
-            {TILE_28, {TILE_27, TILE_29, TILE_19, TILE_20, TILE_36, TILE_37}},
-            {TILE_29, {TILE_28, TILE_30, TILE_20, TILE_21, TILE_37, TILE_38}},
-            {TILE_30, {TILE_29, TILE_31, TILE_21, TILE_22, TILE_38, TILE_39}},
-            {TILE_31, {TILE_30, TILE_32, TILE_22, TILE_23, TILE_39, TILE_40}},
-            {TILE_32, {TILE_31, TILE_33, TILE_23, TILE_24, TILE_40, TILE_41}},
-            {TILE_33, {TILE_32, TILE_34, TILE_24, TILE_25, TILE_41, TILE_42}},
-            {TILE_34, {TILE_33, TILE_35, TILE_25, TILE_26, TILE_42, TILE_43}},
-            {TILE_35, {TILE_34, TILE_26, TILE_43}},
-            {TILE_36, {TILE_37, TILE_27, TILE_28, TILE_44}},
-            {TILE_37, {TILE_36, TILE_38, TILE_28, TILE_29, TILE_44, TILE_45}},
-            {TILE_38, {TILE_37, TILE_39, TILE_29, TILE_30, TILE_45, TILE_46}},
-            {TILE_39, {TILE_38, TILE_40, TILE_30, TILE_31, TILE_46, TILE_47}},
-            {TILE_40, {TILE_39, TILE_41, TILE_31, TILE_32, TILE_47, TILE_48}},
-            {TILE_41, {TILE_40, TILE_42, TILE_32, TILE_33, TILE_48, TILE_49}},
-            {TILE_42, {TILE_41, TILE_43, TILE_33, TILE_34, TILE_49, TILE_50}},
-            {TILE_43, {TILE_42, TILE_34, TILE_35, TILE_50}},
-            {TILE_44, {TILE_45, TILE_36, TILE_37, TILE_51}},
-            {TILE_45, {TILE_44, TILE_46, TILE_37, TILE_38, TILE_51, TILE_52}},
-            {TILE_46, {TILE_45, TILE_47, TILE_38, TILE_39, TILE_52, TILE_53}},
-            {TILE_47, {TILE_46, TILE_48, TILE_39, TILE_40, TILE_53, TILE_54}},
-            {TILE_48, {TILE_47, TILE_49, TILE_40, TILE_41, TILE_54, TILE_55}},
-            {TILE_49, {TILE_48, TILE_50, TILE_41, TILE_42, TILE_55, TILE_56}},
-            {TILE_50, {TILE_49, TILE_42, TILE_43, TILE_56}},
-            {TILE_51, {TILE_52, TILE_44, TILE_45, TILE_57}},
-            {TILE_52, {TILE_51, TILE_53, TILE_45, TILE_46, TILE_57, TILE_58}},
-            {TILE_53, {TILE_52, TILE_54, TILE_46, TILE_47, TILE_58, TILE_59}},
-            {TILE_54, {TILE_53, TILE_55, TILE_47, TILE_48, TILE_59, TILE_60}},
-            {TILE_55, {TILE_54, TILE_56, TILE_48, TILE_49, TILE_60, TILE_61}},
-            {TILE_56, {TILE_55, TILE_49, TILE_50, TILE_61}},
-            {TILE_57, {TILE_58, TILE_51, TILE_52}},
-            {TILE_58, {TILE_57, TILE_59, TILE_52, TILE_53}},
-            {TILE_59, {TILE_58, TILE_60, TILE_53, TILE_54}},
-            {TILE_60, {TILE_59, TILE_61, TILE_54, TILE_55}},
-            {TILE_61, {TILE_60, TILE_55, TILE_56}},
+    std::map<ModelTileEnum::TileEnum, std::list<ModelTileEnum::TileEnum>> neighboursLut = {
+            {ModelTileEnum::TILE_1, {ModelTileEnum::TILE_2, ModelTileEnum::TILE_6, ModelTileEnum::TILE_7}},
+            {ModelTileEnum::TILE_2, {ModelTileEnum::TILE_1, ModelTileEnum::TILE_3, ModelTileEnum::TILE_7, ModelTileEnum::TILE_7, ModelTileEnum::TILE_8}},
+            {ModelTileEnum::TILE_3, {ModelTileEnum::TILE_2, ModelTileEnum::TILE_4, ModelTileEnum::TILE_8, ModelTileEnum::TILE_8, ModelTileEnum::TILE_9}},
+            {ModelTileEnum::TILE_4, {ModelTileEnum::TILE_3, ModelTileEnum::TILE_5, ModelTileEnum::TILE_9, ModelTileEnum::TILE_9, ModelTileEnum::TILE_10}},
+            {ModelTileEnum::TILE_5, {ModelTileEnum::TILE_4, ModelTileEnum::TILE_10, ModelTileEnum::TILE_10, ModelTileEnum::TILE_11}},
+            {ModelTileEnum::TILE_6, {ModelTileEnum::TILE_7, ModelTileEnum::TILE_1, ModelTileEnum::TILE_12, ModelTileEnum::TILE_13}},
+            {ModelTileEnum::TILE_7, {ModelTileEnum::TILE_6, ModelTileEnum::TILE_8, ModelTileEnum::TILE_1, ModelTileEnum::TILE_2, ModelTileEnum::TILE_13, ModelTileEnum::TILE_14}},
+            {ModelTileEnum::TILE_8, {ModelTileEnum::TILE_7, ModelTileEnum::TILE_9, ModelTileEnum::TILE_2, ModelTileEnum::TILE_3, ModelTileEnum::TILE_14, ModelTileEnum::TILE_15}},
+            {ModelTileEnum::TILE_9, {ModelTileEnum::TILE_8, ModelTileEnum::TILE_10, ModelTileEnum::TILE_3, ModelTileEnum::TILE_4, ModelTileEnum::TILE_15, ModelTileEnum::TILE_16}},
+            {ModelTileEnum::TILE_10, {ModelTileEnum::TILE_9, ModelTileEnum::TILE_11, ModelTileEnum::TILE_4, ModelTileEnum::TILE_5, ModelTileEnum::TILE_16, ModelTileEnum::TILE_17}},
+            {ModelTileEnum::TILE_11, {ModelTileEnum::TILE_10, ModelTileEnum::TILE_5, ModelTileEnum::TILE_17, ModelTileEnum::TILE_18}},
+            {ModelTileEnum::TILE_12, {ModelTileEnum::TILE_13, ModelTileEnum::TILE_6, ModelTileEnum::TILE_19, ModelTileEnum::TILE_20}},
+            {ModelTileEnum::TILE_13, {ModelTileEnum::TILE_12, ModelTileEnum::TILE_14, ModelTileEnum::TILE_6, ModelTileEnum::TILE_7, ModelTileEnum::TILE_20, ModelTileEnum::TILE_21}},
+            {ModelTileEnum::TILE_14, {ModelTileEnum::TILE_13, ModelTileEnum::TILE_15, ModelTileEnum::TILE_7, ModelTileEnum::TILE_8, ModelTileEnum::TILE_21, ModelTileEnum::TILE_22}},
+            {ModelTileEnum::TILE_15, {ModelTileEnum::TILE_14, ModelTileEnum::TILE_16, ModelTileEnum::TILE_8, ModelTileEnum::TILE_9, ModelTileEnum::TILE_22, ModelTileEnum::TILE_23}},
+            {ModelTileEnum::TILE_16, {ModelTileEnum::TILE_15, ModelTileEnum::TILE_17, ModelTileEnum::TILE_9, ModelTileEnum::TILE_10, ModelTileEnum::TILE_23, ModelTileEnum::TILE_24}},
+            {ModelTileEnum::TILE_17, {ModelTileEnum::TILE_16, ModelTileEnum::TILE_18, ModelTileEnum::TILE_10, ModelTileEnum::TILE_11, ModelTileEnum::TILE_24, ModelTileEnum::TILE_25}},
+            {ModelTileEnum::TILE_18, {ModelTileEnum::TILE_17, ModelTileEnum::TILE_11, ModelTileEnum::TILE_25, ModelTileEnum::TILE_26}},
+            {ModelTileEnum::TILE_19, {ModelTileEnum::TILE_20, ModelTileEnum::TILE_12, ModelTileEnum::TILE_27, ModelTileEnum::TILE_28}},
+            {ModelTileEnum::TILE_20, {ModelTileEnum::TILE_19, ModelTileEnum::TILE_21, ModelTileEnum::TILE_12, ModelTileEnum::TILE_13, ModelTileEnum::TILE_28, ModelTileEnum::TILE_29}},
+            {ModelTileEnum::TILE_21, {ModelTileEnum::TILE_20, ModelTileEnum::TILE_22, ModelTileEnum::TILE_13, ModelTileEnum::TILE_14, ModelTileEnum::TILE_29, ModelTileEnum::TILE_30}},
+            {ModelTileEnum::TILE_22, {ModelTileEnum::TILE_21, ModelTileEnum::TILE_23, ModelTileEnum::TILE_14, ModelTileEnum::TILE_15, ModelTileEnum::TILE_30, ModelTileEnum::TILE_31}},
+            {ModelTileEnum::TILE_23, {ModelTileEnum::TILE_22, ModelTileEnum::TILE_24, ModelTileEnum::TILE_15, ModelTileEnum::TILE_16, ModelTileEnum::TILE_31, ModelTileEnum::TILE_32}},
+            {ModelTileEnum::TILE_24, {ModelTileEnum::TILE_23, ModelTileEnum::TILE_25, ModelTileEnum::TILE_16, ModelTileEnum::TILE_17, ModelTileEnum::TILE_32, ModelTileEnum::TILE_33}},
+            {ModelTileEnum::TILE_25, {ModelTileEnum::TILE_24, ModelTileEnum::TILE_26, ModelTileEnum::TILE_17, ModelTileEnum::TILE_18, ModelTileEnum::TILE_33, ModelTileEnum::TILE_34}},
+            {ModelTileEnum::TILE_26, {ModelTileEnum::TILE_25, ModelTileEnum::TILE_18, ModelTileEnum::TILE_34, ModelTileEnum::TILE_35}},
+            {ModelTileEnum::TILE_27, {ModelTileEnum::TILE_28, ModelTileEnum::TILE_19, ModelTileEnum::TILE_36}},
+            {ModelTileEnum::TILE_28, {ModelTileEnum::TILE_27, ModelTileEnum::TILE_29, ModelTileEnum::TILE_19, ModelTileEnum::TILE_20, ModelTileEnum::TILE_36, ModelTileEnum::TILE_37}},
+            {ModelTileEnum::TILE_29, {ModelTileEnum::TILE_28, ModelTileEnum::TILE_30, ModelTileEnum::TILE_20, ModelTileEnum::TILE_21, ModelTileEnum::TILE_37, ModelTileEnum::TILE_38}},
+            {ModelTileEnum::TILE_30, {ModelTileEnum::TILE_29, ModelTileEnum::TILE_31, ModelTileEnum::TILE_21, ModelTileEnum::TILE_22, ModelTileEnum::TILE_38, ModelTileEnum::TILE_39}},
+            {ModelTileEnum::TILE_31, {ModelTileEnum::TILE_30, ModelTileEnum::TILE_32, ModelTileEnum::TILE_22, ModelTileEnum::TILE_23, ModelTileEnum::TILE_39, ModelTileEnum::TILE_40}},
+            {ModelTileEnum::TILE_32, {ModelTileEnum::TILE_31, ModelTileEnum::TILE_33, ModelTileEnum::TILE_23, ModelTileEnum::TILE_24, ModelTileEnum::TILE_40, ModelTileEnum::TILE_41}},
+            {ModelTileEnum::TILE_33, {ModelTileEnum::TILE_32, ModelTileEnum::TILE_34, ModelTileEnum::TILE_24, ModelTileEnum::TILE_25, ModelTileEnum::TILE_41, ModelTileEnum::TILE_42}},
+            {ModelTileEnum::TILE_34, {ModelTileEnum::TILE_33, ModelTileEnum::TILE_35, ModelTileEnum::TILE_25, ModelTileEnum::TILE_26, ModelTileEnum::TILE_42, ModelTileEnum::TILE_43}},
+            {ModelTileEnum::TILE_35, {ModelTileEnum::TILE_34, ModelTileEnum::TILE_26, ModelTileEnum::TILE_43}},
+            {ModelTileEnum::TILE_36, {ModelTileEnum::TILE_37, ModelTileEnum::TILE_27, ModelTileEnum::TILE_28, ModelTileEnum::TILE_44}},
+            {ModelTileEnum::TILE_37, {ModelTileEnum::TILE_36, ModelTileEnum::TILE_38, ModelTileEnum::TILE_28, ModelTileEnum::TILE_29, ModelTileEnum::TILE_44, ModelTileEnum::TILE_45}},
+            {ModelTileEnum::TILE_38, {ModelTileEnum::TILE_37, ModelTileEnum::TILE_39, ModelTileEnum::TILE_29, ModelTileEnum::TILE_30, ModelTileEnum::TILE_45, ModelTileEnum::TILE_46}},
+            {ModelTileEnum::TILE_39, {ModelTileEnum::TILE_38, ModelTileEnum::TILE_40, ModelTileEnum::TILE_30, ModelTileEnum::TILE_31, ModelTileEnum::TILE_46, ModelTileEnum::TILE_47}},
+            {ModelTileEnum::TILE_40, {ModelTileEnum::TILE_39, ModelTileEnum::TILE_41, ModelTileEnum::TILE_31, ModelTileEnum::TILE_32, ModelTileEnum::TILE_47, ModelTileEnum::TILE_48}},
+            {ModelTileEnum::TILE_41, {ModelTileEnum::TILE_40, ModelTileEnum::TILE_42, ModelTileEnum::TILE_32, ModelTileEnum::TILE_33, ModelTileEnum::TILE_48, ModelTileEnum::TILE_49}},
+            {ModelTileEnum::TILE_42, {ModelTileEnum::TILE_41, ModelTileEnum::TILE_43, ModelTileEnum::TILE_33, ModelTileEnum::TILE_34, ModelTileEnum::TILE_49, ModelTileEnum::TILE_50}},
+            {ModelTileEnum::TILE_43, {ModelTileEnum::TILE_42, ModelTileEnum::TILE_34, ModelTileEnum::TILE_35, ModelTileEnum::TILE_50}},
+            {ModelTileEnum::TILE_44, {ModelTileEnum::TILE_45, ModelTileEnum::TILE_36, ModelTileEnum::TILE_37, ModelTileEnum::TILE_51}},
+            {ModelTileEnum::TILE_45, {ModelTileEnum::TILE_44, ModelTileEnum::TILE_46, ModelTileEnum::TILE_37, ModelTileEnum::TILE_38, ModelTileEnum::TILE_51, ModelTileEnum::TILE_52}},
+            {ModelTileEnum::TILE_46, {ModelTileEnum::TILE_45, ModelTileEnum::TILE_47, ModelTileEnum::TILE_38, ModelTileEnum::TILE_39, ModelTileEnum::TILE_52, ModelTileEnum::TILE_53}},
+            {ModelTileEnum::TILE_47, {ModelTileEnum::TILE_46, ModelTileEnum::TILE_48, ModelTileEnum::TILE_39, ModelTileEnum::TILE_40, ModelTileEnum::TILE_53, ModelTileEnum::TILE_54}},
+            {ModelTileEnum::TILE_48, {ModelTileEnum::TILE_47, ModelTileEnum::TILE_49, ModelTileEnum::TILE_40, ModelTileEnum::TILE_41, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}},
+            {ModelTileEnum::TILE_49, {ModelTileEnum::TILE_48, ModelTileEnum::TILE_50, ModelTileEnum::TILE_41, ModelTileEnum::TILE_42, ModelTileEnum::TILE_55, ModelTileEnum::TILE_56}},
+            {ModelTileEnum::TILE_50, {ModelTileEnum::TILE_49, ModelTileEnum::TILE_42, ModelTileEnum::TILE_43, ModelTileEnum::TILE_56}},
+            {ModelTileEnum::TILE_51, {ModelTileEnum::TILE_52, ModelTileEnum::TILE_44, ModelTileEnum::TILE_45, ModelTileEnum::TILE_57}},
+            {ModelTileEnum::TILE_52, {ModelTileEnum::TILE_51, ModelTileEnum::TILE_53, ModelTileEnum::TILE_45, ModelTileEnum::TILE_46, ModelTileEnum::TILE_57, ModelTileEnum::TILE_58}},
+            {ModelTileEnum::TILE_53, {ModelTileEnum::TILE_52, ModelTileEnum::TILE_54, ModelTileEnum::TILE_46, ModelTileEnum::TILE_47, ModelTileEnum::TILE_58, ModelTileEnum::TILE_59}},
+            {ModelTileEnum::TILE_54, {ModelTileEnum::TILE_53, ModelTileEnum::TILE_55, ModelTileEnum::TILE_47, ModelTileEnum::TILE_48, ModelTileEnum::TILE_59, ModelTileEnum::TILE_60}},
+            {ModelTileEnum::TILE_55, {ModelTileEnum::TILE_54, ModelTileEnum::TILE_56, ModelTileEnum::TILE_48, ModelTileEnum::TILE_49, ModelTileEnum::TILE_60, ModelTileEnum::TILE_61}},
+            {ModelTileEnum::TILE_56, {ModelTileEnum::TILE_55, ModelTileEnum::TILE_49, ModelTileEnum::TILE_50, ModelTileEnum::TILE_61}},
+            {ModelTileEnum::TILE_57, {ModelTileEnum::TILE_58, ModelTileEnum::TILE_51, ModelTileEnum::TILE_52}},
+            {ModelTileEnum::TILE_58, {ModelTileEnum::TILE_57, ModelTileEnum::TILE_59, ModelTileEnum::TILE_52, ModelTileEnum::TILE_53}},
+            {ModelTileEnum::TILE_59, {ModelTileEnum::TILE_58, ModelTileEnum::TILE_60, ModelTileEnum::TILE_53, ModelTileEnum::TILE_54}},
+            {ModelTileEnum::TILE_60, {ModelTileEnum::TILE_59, ModelTileEnum::TILE_61, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}},
+            {ModelTileEnum::TILE_61, {ModelTileEnum::TILE_60, ModelTileEnum::TILE_55, ModelTileEnum::TILE_56}},
     };
 
     /**
@@ -92,7 +92,7 @@ private:
      * @param tileEnum TileEnum to be checked
      * @return bool true if tileEnum is FREE
      */
-    bool isMoveToPossible(TileEnum tileEnum);
+    bool isMoveToPossible(ModelTileEnum::TileEnum tileEnum);
 
 public:
     /**
@@ -130,11 +130,11 @@ public:
 
     std::list<bool> getGameBooleans() override;
 
-    std::list<TileEnum> getLastMove() override;
+    std::list<ModelTileEnum::TileEnum> getLastMove() override;
 
     ModelBoard::Board getBoard() override;
 
-    bool isMoveValid(TileEnum moveFrom, TileEnum moveTo) override;
+    bool isMoveValid(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) override;
 
     void setUserId(std::string userId) override;
 
@@ -150,11 +150,11 @@ public:
 
     void forwardGameStatus(ModelGame::Game game) override;
 
-    bool isMoveFromPossible(TileEnum moveFrom) override;
+    bool isMoveFromPossible(ModelTileEnum::TileEnum moveFrom) override;
 
-    std::list<TileEnum> getValidDirectNeighbours(TileEnum kachel) override;
+    std::list<ModelTileEnum::TileEnum> getValidDirectNeighbours(ModelTileEnum::TileEnum kachel) override;
 
-    std::list<TileEnum> getValidSecondaryNeighbours(TileEnum kachel) override;
+    std::list<ModelTileEnum::TileEnum> getValidSecondaryNeighbours(ModelTileEnum::TileEnum kachel) override;
 };
 
 

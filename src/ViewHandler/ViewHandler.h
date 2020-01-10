@@ -61,9 +61,9 @@ public:
 
     void leaveLobby() override;
 
-    bool getMoveHelp(TileEnum tile) override;
+    bool getMoveHelp(ModelTileEnum::TileEnum tile) override;
 
-    bool move(TileEnum moveFrom, TileEnum moveTo) override;
+    bool move(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) override;
 
     void leaveGame(bool sendLeave) override;
 

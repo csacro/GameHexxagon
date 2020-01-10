@@ -34,7 +34,7 @@ public:
      * @param isTurn bool is true when it is User's turn
      */
     virtual void display(std::string playerOnePoints, std::string playerTwoPoints,
-            TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board,
+                         ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo, ModelBoard::Board board,
             bool isTurn)
             = 0;
 
@@ -49,7 +49,7 @@ public:
      * @param isWinner is true when User has won, else false
      */
     virtual void display(std::string playerOnePoints, std::string playerTwoPoints,
-             TileEnum moveFrom, TileEnum moveTo, ModelBoard::Board board,
+                         ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo, ModelBoard::Board board,
              bool isTie, bool isWinner)
              = 0;
     /**
@@ -58,7 +58,7 @@ public:
      * @param directNeighbours std::list<TileEnum> containing all direct neighbours tiles of the requested tile to which a move can be made
      * @param secondaryNeighbours std::list<TileEnum> containing all neighbours of neighbours ot the request tile to which a move can be made
      */
-    virtual void displayHelp(std::list<TileEnum> directNeighbours, std::list<TileEnum> secondaryNeighbours) = 0;
+    virtual void displayHelp(std::list<ModelTileEnum::TileEnum> directNeighbours, std::list<ModelTileEnum::TileEnum> secondaryNeighbours) = 0;
 
     /**
      * called by ViewHandler to clear everything that has been drawn by Gameview in order to display help
