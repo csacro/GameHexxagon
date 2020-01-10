@@ -13,8 +13,8 @@ namespace ModelGame {
         game.playerTwoUserName = j.at("playerTwoUserName").get<std::string>();
         game.playerOneLeft = j.at("playerOneLeft").get<bool>();
         game.playerTwoLeft = j.at("playerTwoLeft").get<bool>();
-        game.playerOnePoints = j.at("playerOnePoints");
-        game.playerTwoPoints = j.at("playerTwoPoints");
+        game.playerOnePoints = j.at("playerOnePoints").get<int>();
+        game.playerTwoPoints = j.at("playerTwoPoints").get<int>();
         game.board = j.at("board").get<ModelBoard::Board>();
         game.turn = j.at("turn").get<int>();
         if(j.find("lastMoveFrom") != j.end()) {
