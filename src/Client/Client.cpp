@@ -18,7 +18,7 @@ void Client::onReceiveMessage(std::string message) {
             mToData->setUserId(json.at("userId").get<std::string>());
             break;
         case AvailableLobbies:
-            //TODO: mToData->forwardAvailableLobbies(json.at("availableLobbies").get<std::list<ModelLobby::Lobby>>());
+            mToData->forwardAvailableLobbies(json.at("availableLobbies").get<std::list<ModelLobby::Lobby>>());
             break;
         case LobbyCreated:
             mToData->infoLobbyCreated(json.at("lobbyId").get<std::string>(), json.at("successfullyCreated").get<bool>());
@@ -27,18 +27,16 @@ void Client::onReceiveMessage(std::string message) {
             mToData->infoLobbyJoined(json.at("successfullyJoined").get<bool>());
             break;
         case LobbyStatus:
-            //TODO: mToData->forwardLobbyStatus(json.get<ModelLobby::Lobby>());
+            mToData->forwardLobbyStatus(json.get<ModelLobby::Lobby>());
             break;
         case GameStarted:
             mToData->infoGameStarted();
             break;
         case GameStatus:
-            //TODO: mToData->forwardGameStatus(json.get<ModelGame::Game>());
+            mToData->forwardGameStatus(json.get<ModelGame::Game>());
             break;
         case Strike:
-            if(json.at("strikeCount").get<int>() == json.at("maxStrikeCount").get<int>()) {
-                disconnect();
-            }
+            //do nothing handled by closeListener
             break;
     }
 }
@@ -52,6 +50,7 @@ void Client::connect(std::string server) {
 
     mWebSocketClient.emplace(servername, "/", port, "");
     mWebSocketClient->receiveListener.operator()(std::bind(&Client::onReceiveMessage, this, std::placeholders::_1));
+    mWebSocketClient->closeListener.operator()(std::bind(&Client::disconnect, this));
 }
 
 void Client::getAvailableLobbies(std::string userId) {
@@ -113,6 +112,6 @@ void Client::leaveGame(std::string userId, std::string gameId) {
 }
 
 void Client::disconnect() {
-    //TODO: mWebSocketClient.reset();
+    mWebSocketClient.reset(); //TODO not working
     mToData->setUserId("");
 }
