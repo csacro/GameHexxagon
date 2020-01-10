@@ -56,15 +56,6 @@ std::string messageTypeToString(MessageType mt) {
 }
 
 /**
- * parse MessageType from JSON
- * @param j nlohmann::json containing MessageType as JSON
- * @param messageType MessageType that is getting initialised by j
- */
-void from_json(const nlohmann::json &j, MessageType messageType) {
-    messageType = messagetypeMapper.at(j.at("messageType").get<std::string>());
-}
-
-/**
  * parse MessageType to JSON
  * @param j nlohmann::json that is getting created with messageType
  * @param messageType MessageType that is parsed to JSON
