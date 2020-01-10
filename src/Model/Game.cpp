@@ -17,11 +17,20 @@ namespace ModelGame {
         game.playerTwoPoints = j.at("playerTwoPoints");
         game.board = j.at("board").get<ModelBoard::Board>();
         game.turn = j.at("turn").get<bool>();
-        game.lastMoveFrom = (TileEnum)(std::stoi(j.at("lastMoveFrom").get<std::string>()) -1);
-        game.lastMoveTo = (TileEnum)(std::stoi(j.at("lastMoveTo").get<std::string>()) -1);
+        if(j.find("lastMoveFrom") != j.end()) {
+            game.lastMoveFrom = (TileEnum) (std::stoi(j.at("lastMoveFrom").get<std::string>()) - 1);
+            game.lastMoveTo = (TileEnum) (std::stoi(j.at("lastMoveTo").get<std::string>()) - 1);
+        } else {
+            game.lastMoveFrom = TILE_1;
+            game.lastMoveTo = TILE_1;
+        }
         game.activePlayer = j.at("activePlayer").get<std::string>();
         game.tie = j.at("tie").get<bool>();
-        game.winner = j.at("winner").get<std::string>();
+        if(j.find("winner") != j.end()) {
+            game.winner = j.at("winner").get<std::string>();
+        } else {
+            game.winner = "";
+        }
         game.isClosed = j.at("isClosed").get<bool>();
     }
 }  //namespace ModelGame

@@ -10,8 +10,13 @@ Client::Client(ClientToData &ctd) {
 }
 
 void Client::onReceiveMessage(std::string message) {
+
+    std::cout << message << std::endl;
+
     auto json = nlohmann::json::parse(message);
     MessageType messageType = messagetypeMapper.at(json.at("messageType").get<std::string>());
+
+    std::cout << messageType << std::endl;
 
     switch(messageType) {
         case Welcome:
@@ -27,7 +32,7 @@ void Client::onReceiveMessage(std::string message) {
             mToData->infoLobbyJoined(json.at("successfullyJoined").get<bool>());
             break;
         case LobbyStatus:
-            mToData->forwardLobbyStatus(json.get<ModelLobby::Lobby>());
+            mToData->forwardLobbyStatus(json.at("lobby").get<ModelLobby::Lobby>());
             break;
         case GameStarted:
             mToData->infoGameStarted();
@@ -98,8 +103,8 @@ void Client::gameMove(std::string userId, std::string gameId, TileEnum moveFrom,
     j["messageType"] = messageTypeToString(GameMove);
     j["userId"] = userId;
     j["gameId"] = gameId;
-    j["moveFrom"] = "TileEnum_" + std::to_string(moveFrom);
-    j["moveTo"] = "TileEnum_"  + std::to_string(moveTo);
+    j["moveFrom"] = "Tile_" + std::to_string(moveFrom);
+    j["moveTo"] = "Tile_"  + std::to_string(moveTo);
     mWebSocketClient->send(j.dump());
 }
 
@@ -112,6 +117,8 @@ void Client::leaveGame(std::string userId, std::string gameId) {
 }
 
 void Client::disconnect() {
-    mWebSocketClient.reset(); //TODO not working
+    if(mWebSocketClient.has_value()) {
+        mWebSocketClient.reset();
+    }
     mToData->setUserId("");
 }
