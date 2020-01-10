@@ -2,6 +2,7 @@
  * @author Carolin Schindler
  */
 
+#include <iostream>
 #include "Lobbyview.h"
 
 
@@ -70,7 +71,7 @@ void Lobbyview::display(std::string lobbyName,
     sf::String playerOneText(playerOneUserName);
     playerOneUsername.setText(playerOneText);
     sf::String playerTwoText(playerTwoUserName);
-    playerOneUsername.setText(playerTwoText);
+    playerTwoUsername.setText(playerTwoText);
 
     start.isVisible = isStartable;
 }

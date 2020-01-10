@@ -8,7 +8,7 @@ namespace ModelLobby {
     void from_json(const nlohmann::json &j, struct Lobby &lobby) {
         lobby.lobbyId = j.at("lobbyId").get<std::string>();
         lobby.lobbyName = j.at("lobbyName").get<std::string>();
-        if(j.find("playerTwo") != j.end()) {
+        if(j.find("playerOne") != j.end()) {
             lobby.playerOne = j.at("playerOne").get<std::string>();
             lobby.playerOneUserName = j.at("playerOneUserName").get<std::string>();
         } else {
