@@ -14,8 +14,6 @@ void Client::onReceiveMessage(std::string message) {
     auto json = nlohmann::json::parse(message);
     MessageType messageType = messagetypeMapper.at(json.at("messageType").get<std::string>());
 
-    std::cout << messageType << std::endl;
-
     switch(messageType) {
         case Welcome:
             std::cout << "received: Welcome"<< std::endl;
@@ -90,7 +88,6 @@ void Client::joinLobby(std::string userId, std::string lobbyId, std::string user
     j["lobbyId"] = lobbyId;
     j["userName"] = userName;
     mWebSocketClient->send(j.dump());
-    std::cout << "sent join lobby" << std::endl;
 }
 
 void Client::leaveLobby(std::string userId, std::string lobbyId) {

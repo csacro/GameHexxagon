@@ -10,6 +10,8 @@ namespace ModelTileEnum {
     }
 
     TileEnum StringToTileEnum(std::string s) {
-        return (TileEnum)(std::stoi(s) - 1);
+        int splitpos = s.find("_");
+        int tileNumber = std::stoi(s.substr(splitpos+1, s.size()-1));
+        return (TileEnum)(tileNumber - 1); //TODO stoi causing what():stoi 'std::invalid_argument'
     }
 } //namespace ModelTileEnum

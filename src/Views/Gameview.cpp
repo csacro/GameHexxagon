@@ -27,7 +27,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     playerTwopoints = TextField(pos, initText, font, 0, 0);
 
     pos.y = height*0.15;
-    pos.x = width*0.35;
+    pos.x = width*0.45;
     winner = TextField(pos, initText, font, 0.7*height, 0.7*height);
 
     float diameter = 0.6*height/9;
@@ -36,7 +36,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     int tileId = 0;
     for(int i = -4; i <= 4; i++) {
         pos.y = height*0.15+gap/2 + (float)abs(i)/2*tileDelta;
-        pos.x = width*0.35+gap/2 + (i+4)*tileDelta;
+        pos.x = width*0.45+gap/2 + (i+4)*tileDelta;
         for(int j = 1; j <= 9-abs(i); j++) {
             tileboard.emplace((ModelTileEnum::TileEnum)tileId, Tile((ModelTileEnum::TileEnum)tileId, pos.x, pos.y, diameter/2));
             tileId++;
@@ -63,10 +63,13 @@ void Gameview::tileClickFunction(Listener *listener) {
     if(mIsTurn) {
         Tile *mClickedTile = dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement);
         if(isFromSet) {
+            std::cout << "from is set" << std::endl;
             if(!mToView->move(from->mTileId, mClickedTile->mTileId)) {
+                std::cout << "move was not possible" << std::endl;
                 askForMoveHelp(mClickedTile);
             }
         } else {
+            std::cout << "from is NOT set" << std::endl;
             askForMoveHelp(mClickedTile);
         }
     }
@@ -150,11 +153,11 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
 }
 
 void Gameview::displayHelp(std::list<ModelTileEnum::TileEnum> directNeighbours, std::list<ModelTileEnum::TileEnum> secondaryNeighbours) {
-    for(ModelTileEnum::TileEnum tileEnum: secondaryNeighbours) {
-        tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Yellow);
-    }
-    for(ModelTileEnum::TileEnum tileEnum: directNeighbours) {
+    for(ModelTileEnum::TileEnum &tileEnum: directNeighbours) {
         tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Green);
+    }
+    for(ModelTileEnum::TileEnum &tileEnum: secondaryNeighbours) {
+        tileboard.at(tileEnum).setHexagonOutlineColor(sf::Color::Yellow);
     }
 }
 
@@ -194,7 +197,11 @@ void Gameview::displayPlayerPoints(std::string &playerOnePoints, std::string &pl
 
 void Gameview::askForMoveHelp(Tile *tile) {
     if(mToView->getMoveHelp(tile->mTileId)) {
+        std::cout << "got MoveHelp -> from is set" << std::endl;
         from = tile;
         isFromSet = true;
+    } else if(isFromSet) {
+        std::cout << "got NO MoveHelp but from was set" << std::endl;
+        mToView->getMoveHelp(from->mTileId);
     }
 }

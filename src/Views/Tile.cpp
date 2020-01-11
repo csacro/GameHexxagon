@@ -13,7 +13,7 @@ Tile::Tile(ModelTileEnum::TileEnum id, float posx, float posy, float radius) {
     mHexagon.setFillColor(sf::Color::Blue);
     mHexagon.setRadius(radius);
     mHexagon.setPosition(posx, posy);
-    mHexagon.setOutlineThickness(0.1*radius);
+    mHexagon.setOutlineThickness(0.2*radius);
     mHexagon.setOutlineColor(sf::Color::Transparent);
     mHexagon.setOrigin(radius, radius);
 
