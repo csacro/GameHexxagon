@@ -115,7 +115,7 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidDirectNeighbours(ModelTi
     std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
     for(auto it = directNeighbours.begin(); it != directNeighbours.end(); it++) {
         if(!isMoveToPossible(*it)) {
-            directNeighbours.erase(it++);
+            directNeighbours.erase(it--);
         }
     }
     return directNeighbours;
@@ -129,7 +129,7 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidSecondaryNeighbours(Mode
     }
     for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
         if(!isMoveToPossible(*it) || std::find(directNeighbours.begin(), directNeighbours.end(), *it) != directNeighbours.end()) {
-            secondaryNeighbours.erase(it++);
+            secondaryNeighbours.erase(it--);
         }
     }
     return secondaryNeighbours;
