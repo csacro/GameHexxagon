@@ -116,21 +116,21 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidDirectNeighbours(ModelTi
     std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
     for(auto it = directNeighbours.begin(); it != directNeighbours.end(); it++) {
         if(!isMoveToPossible(*it)) {
-            directNeighbours.erase(it);
+            directNeighbours.erase(it++);
         }
     }
     return directNeighbours;
 }
 
 std::list<ModelTileEnum::TileEnum> DataHandler::getValidSecondaryNeighbours(ModelTileEnum::TileEnum kachel) {
-    auto directNeighbours = neighboursLut.at(kachel);
+    std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
     std::list<ModelTileEnum::TileEnum> secondaryNeighbours;
-    for(ModelTileEnum::TileEnum te: directNeighbours) {
+    for(ModelTileEnum::TileEnum &te: directNeighbours) {
         secondaryNeighbours.splice(secondaryNeighbours.end(), neighboursLut.at(te));
     }
     for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
         if(!isMoveToPossible(*it) || std::find(directNeighbours.begin(), directNeighbours.end(), *it) != directNeighbours.end()) {
-            secondaryNeighbours.erase(it);
+            secondaryNeighbours.erase(it++);
         }
     }
     return std::list<ModelTileEnum::TileEnum>();
