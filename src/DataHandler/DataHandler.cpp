@@ -104,12 +104,11 @@ bool DataHandler::isMoveValid(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::T
 }
 
 bool DataHandler::isMoveFromPossible(ModelTileEnum::TileEnum moveFrom) {
-    ModelBoard::Board curBoard = mGame.board;
     ModelTileStateEnum::TileStateEnum myStone = ModelTileStateEnum::PLAYERTWO;
     if(mUser.userId == mGame.playerOne) {
         myStone = ModelTileStateEnum::PLAYERONE;
     }
-    return curBoard.tiles.at(moveFrom) == myStone && mUser.userId == mGame.activePlayer;
+    return mGame.board.tiles.at(moveFrom) == myStone && mUser.userId == mGame.activePlayer;
 }
 
 std::list<ModelTileEnum::TileEnum> DataHandler::getValidDirectNeighbours(ModelTileEnum::TileEnum kachel) {
@@ -133,12 +132,11 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidSecondaryNeighbours(Mode
             secondaryNeighbours.erase(it++);
         }
     }
-    return std::list<ModelTileEnum::TileEnum>();
+    return secondaryNeighbours;
 }
 
 bool DataHandler::isMoveToPossible(ModelTileEnum::TileEnum tileEnum) {
-    ModelBoard::Board b = mGame.board;
-    return b.tiles.at(tileEnum) == ModelTileStateEnum::FREE;
+    return mGame.board.tiles.at(tileEnum) == ModelTileStateEnum::FREE && mUser.userId == mGame.activePlayer;
 }
 
 
