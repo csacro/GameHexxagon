@@ -174,8 +174,8 @@ void ViewHandler::gotGameStatus() {
     std::list<ModelTileEnum::TileEnum> lastmove = mToData->getLastMove();
     ModelBoard::Board board = mToData->getBoard();
     if(gamebools.size() == 1) {
-        mToGameview->display(*gamestrings.begin(), *gamestrings.end(), *lastmove.begin(), *lastmove.end(), board, *gamebools.begin());
+        mToGameview->display(gamestrings.front(), gamestrings.back(), lastmove.front(), lastmove.back(), board, gamebools.front());
     } else {
-        mToGameview->display(*gamestrings.begin(), *gamestrings.end(), *lastmove.begin(), *lastmove.end(), board, *gamebools.begin(), *gamebools.end());
+        mToGameview->display(gamestrings.front(), gamestrings.back(), lastmove.front(), lastmove.back(), board, gamebools.front(), gamebools.back());
     }
 }
