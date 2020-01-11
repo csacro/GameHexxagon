@@ -86,6 +86,8 @@ void ViewHandler::joinLobby(std::string lobbyName, std::string userName) {
     std::string lobbyId = mToData->getLobbyId(lobbyName);
     if(!lobbyId.empty()) {
         mToClient->joinLobby(mToData->getUserId(), lobbyId, userName);
+    } else {
+        updateLobbyoverview();
     }
 }
 
