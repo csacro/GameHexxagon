@@ -26,6 +26,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     pos.y = height*0.2;
     playerTwopoints = TextField(pos, initText, font, 0, 0);
 
+    pos.x = width*0.1;
     pos.y = height*0.3;
     mTurn = TextField(pos, initText, font, 0, 0);
 
