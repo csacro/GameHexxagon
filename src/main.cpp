@@ -13,20 +13,11 @@
 #include "DataHandler/DataHandler.h"
 #include "Client/Client.h"
 
-//TODO: Gameview position of Elements
-//TODO: TextField fix positioning (SFMLComponents and maybe "\n")
-//todo: atm join not possible -> update; better: join not possible -> update -> try join again
-
-
-//todo: SFMLComponents thread safe lists in ListenerRenderWindow
-//todo: after request block ViewWindow until display
-
 int main() {
     setenv("DISPLAY", "127.0.0.1:0", true);
 
-    ListenerRenderWindow lrw(sf::VideoMode::getDesktopMode(), "Hexxagon", sf::Style::Fullscreen);
-    //ListenerRenderWindow lrw(sf::VideoMode(1280, 720/2.2), "Hexxagon", sf::Style::Default);
-    //ListenerRenderWindow lrw(sf::VideoMode(2048/2, 1152/2.2), "Hexxagon", sf::Style::Default);
+    //ListenerRenderWindow lrw(sf::VideoMode::getDesktopMode(), "Hexxagon", sf::Style::Fullscreen);
+    ListenerRenderWindow lrw(sf::VideoMode::getDesktopMode(), "Hexxagon", sf::Style::Titlebar | sf::Style::Close);
 
     sf::Font arial;
     if (!arial.loadFromFile("../../res/fonts/arial.ttf")) {

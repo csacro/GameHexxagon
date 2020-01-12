@@ -88,6 +88,7 @@ void ViewHandler::joinLobby(std::string lobbyName, std::string userName) {
     if(!lobbyId.empty()) {
         mToClient->joinLobby(mToData->getUserId(), lobbyId, userName);
     } else {
+        joinWasNotPossible = lobbyName;
         updateLobbyoverview();
     }
 }
@@ -143,6 +144,10 @@ void ViewHandler::infoConnected(bool isConnected) {
 
 void ViewHandler::gotAvailableLobbies() {
     mToLobbyoverview->display(mToData->getJoinableLobbyNames());
+    if(!joinWasNotPossible.empty()) {
+        joinLobby(joinWasNotPossible, mToData->getUserName());
+        joinWasNotPossible = "";
+    }
 }
 
 void ViewHandler::infoLobbyCreated(bool success) {

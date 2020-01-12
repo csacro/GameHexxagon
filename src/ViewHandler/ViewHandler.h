@@ -91,6 +91,8 @@ private:
     ViewToLobbyview *mToLobbyview; //interface to Lobbyview
     ViewToGameview *mToGameview; //interface to Gameview
 
+    std::string joinWasNotPossible = ""; //to be able to retry failed join after update
+
     /**
      * method to switch View to Lobbyview
      */

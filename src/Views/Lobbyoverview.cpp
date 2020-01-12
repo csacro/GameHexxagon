@@ -14,7 +14,7 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     sf::String initText("");
 
     //Elements
-    sf::Vector2i pos(width*0.45, height*0.23);
+    sf::Vector2i pos(width*0.35, height*0.23);
     sf::String usernameDefaultText("unknownUser");
     userName = EditField(pos, usernameDefaultText, font, 0, 0);
 
@@ -35,8 +35,8 @@ Lobbyoverview::Lobbyoverview(LobbyoverviewToView &lotv, sf::Font &font, sf::Vect
     sf::String updateText("UPDATE");
     update = Button(pos, updateText, font, 0, 0);
 
-    pos.x = 0.3;
-    availableLobbies = TextField(pos, initText, font, 0.4*width, 0.1*height);
+    pos.x = width*0.35;
+    availableLobbies = TextField(pos, initText, font, 0, 0);
 
     pos.x = width*0.8;
     pos.y = height*0.9;

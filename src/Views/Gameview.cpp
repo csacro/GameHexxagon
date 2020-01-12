@@ -19,11 +19,10 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     pos.y = height*0.2;
     playerTwoUsername = TextField(pos, initText, font, 0, 0);
 
-    pos.x = width*0.2;
+    pos.x = width*0.3;
     pos.y = height*0.1;
     playerOnepoints = TextField(pos, initText, font, 0, 0);
 
-    pos.x = width*0.1;
     pos.y = height*0.2;
     playerTwopoints = TextField(pos, initText, font, 0, 0);
 
@@ -32,7 +31,7 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
 
     pos.y = height*0.15;
     pos.x = width*0.45;
-    winner = TextField(pos, initText, font, 0.7*height, 0.7*height);
+    winner = TextField(pos, initText, font, 0, 0);
 
     float diameter = 0.6*height/9;
     float gap = 0.1*height/9;
