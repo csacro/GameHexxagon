@@ -30,6 +30,7 @@ void ViewHandler::showLobbyview() {
 }
 
 void ViewHandler::showGameview() {
+    mToGameview->clearHelp();
     std::list<std::string> lobbystrings = mToData->getLobbyStrings();
     auto it2 = lobbystrings.begin();
     std::advance(it2, 1);

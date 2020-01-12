@@ -12,6 +12,6 @@ namespace ModelTileEnum {
     TileEnum StringToTileEnum(std::string s) {
         int splitpos = s.find("_");
         int tileNumber = std::stoi(s.substr(splitpos+1, s.size()-1));
-        return (TileEnum)(tileNumber - 1); //TODO stoi causing what():stoi 'std::invalid_argument'
+        return (TileEnum)(tileNumber - 1);
     }
 } //namespace ModelTileEnum

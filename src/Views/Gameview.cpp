@@ -23,8 +23,12 @@ Gameview::Gameview(GameviewToView &gtv, sf::Font &font, sf::Vector2u windowSize)
     pos.y = height*0.1;
     playerOnepoints = TextField(pos, initText, font, 0, 0);
 
+    pos.x = width*0.1;
     pos.y = height*0.2;
     playerTwopoints = TextField(pos, initText, font, 0, 0);
+
+    pos.y = height*0.3;
+    mTurn = TextField(pos, initText, font, 0, 0);
 
     pos.y = height*0.15;
     pos.x = width*0.45;
@@ -63,13 +67,10 @@ void Gameview::tileClickFunction(Listener *listener) {
     if(mIsTurn) {
         Tile *mClickedTile = dynamic_cast<Tile*>(dynamic_cast<OnClickListener*>(listener)->mClickableElement);
         if(isFromSet) {
-            std::cout << "from is set" << std::endl;
             if(!mToView->move(from->mTileId, mClickedTile->mTileId)) {
-                std::cout << "move was not possible" << std::endl;
                 askForMoveHelp(mClickedTile);
             }
         } else {
-            std::cout << "from is NOT set" << std::endl;
             askForMoveHelp(mClickedTile);
         }
     }
@@ -92,6 +93,7 @@ void Gameview::draw(sf::RenderWindow &renderWindow) {
     playerOnepoints.draw(renderWindow);
     playerTwopoints.draw(renderWindow);
     leave.draw(renderWindow);
+    mTurn.draw(renderWindow);
 }
 
 void Gameview::listen(sf::Event event, sf::RenderWindow &renderWindow) {
@@ -129,6 +131,11 @@ void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints,
     updateBoard(moveFrom, moveTo, board);
 
     mIsTurn = isTurn;
+    sf::String turnText("waiting for turn");
+    if(mIsTurn) {
+        turnText = sf::String("Your turn");
+    }
+    mTurn.setText(turnText);
 }
 
 void Gameview::display(std::string playerOnePoints, std::string playerTwoPoints, ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo,
@@ -197,11 +204,9 @@ void Gameview::displayPlayerPoints(std::string &playerOnePoints, std::string &pl
 
 void Gameview::askForMoveHelp(Tile *tile) {
     if(mToView->getMoveHelp(tile->mTileId)) {
-        std::cout << "got MoveHelp -> from is set" << std::endl;
         from = tile;
         isFromSet = true;
     } else if(isFromSet) {
-        std::cout << "got NO MoveHelp but from was set" << std::endl;
         mToView->getMoveHelp(from->mTileId);
     }
 }

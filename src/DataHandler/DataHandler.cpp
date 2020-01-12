@@ -68,6 +68,24 @@ std::list <std::string> DataHandler::getGameStrings() {
 }
 
 std::list<bool> DataHandler::getGameBooleans() {
+    //to fix bug in server (not telling winner but changing state) -> should be done in server
+    if(mGame.playerOnePoints == 0) {
+        return {false, mUser.userId != mGame.playerOne};
+    }
+    if(mGame.playerTwoPoints == 0) {
+        return {false, mUser.userId != mGame.playerTwo};
+    }
+    if(mGame.playerOnePoints + mGame.playerTwoPoints == 61-8) {
+        if(mGame.playerOnePoints > mGame.playerTwoPoints) {
+            return {false, mUser.userId == mGame.playerOne};
+        }
+        if(mGame.playerOnePoints < mGame.playerTwoPoints) {
+            return {false, mUser.userId == mGame.playerTwo};
+        }
+        return {true, false};
+    }
+    //to fix bug in server (not telling winner but changing state) -> should be done in server
+
     if(mGame.tie) {
         return {true, false};
     }
@@ -87,15 +105,15 @@ ModelBoard::Board DataHandler::getBoard() {
 
 bool DataHandler::isMoveValid(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo) {
     if(isMoveFromPossible(moveFrom)) {
-        std::list<ModelTileEnum::TileEnum> direct = getValidDirectNeighbours(moveTo);
-        for(ModelTileEnum::TileEnum &tileEnum: direct) {
-            if(moveTo == tileEnum) {
+        std::list<ModelTileEnum::TileEnum> direct = getValidDirectNeighbours(moveFrom);
+        for(ModelTileEnum::TileEnum &tileEnumDirect: direct) {
+            if(moveTo == tileEnumDirect) {
                 return true;
             }
         }
-        std::list<ModelTileEnum::TileEnum> secondary = getValidSecondaryNeighbours(moveTo);
-        for(ModelTileEnum::TileEnum &tileEnum: secondary) {
-            if(moveTo == tileEnum) {
+        std::list<ModelTileEnum::TileEnum> secondary = getValidSecondaryNeighbours(moveFrom);
+        for(ModelTileEnum::TileEnum &tileEnumSecondary: secondary) {
+            if(moveTo == tileEnumSecondary) {
                 return true;
             }
         }
@@ -127,13 +145,14 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidSecondaryNeighbours(Mode
     std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
     std::list<ModelTileEnum::TileEnum> secondaryNeighbours;
     for(ModelTileEnum::TileEnum &te: directNeighbours) {
-        secondaryNeighbours.splice(secondaryNeighbours.end(), neighboursLut.at(te));
-    }
-    for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
-        if(isMoveToPossible(*it) && std::find(directNeighbours.begin(), directNeighbours.end(), *it) == directNeighbours.end()) {
-            ret.push_back(*it);
+        secondaryNeighbours = neighboursLut.at(te);
+        for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
+            if(isMoveToPossible(*it) && std::find(directNeighbours.begin(), directNeighbours.end(), *it) == directNeighbours.end()) {
+                ret.push_back(*it);
+            }
         }
     }
+
     return ret;
 }
 

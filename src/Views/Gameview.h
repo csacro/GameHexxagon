@@ -79,6 +79,7 @@ private:
     inline static TextField playerOnepoints; //TextField to display points of playerOne
     inline static TextField playerTwopoints; //TextField to display points of playerTwo
     inline static Button leave; //Button to leave Game
+    inline static TextField mTurn; //TextField to display if it is user's turn and which stones to use
 
     //Listener
     inline static std::list<OnClickListener> tileboardClick; //for tileboard
