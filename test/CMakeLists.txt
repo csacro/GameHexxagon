@@ -3,6 +3,7 @@ project(GameHexxagon_test)
 
 set(CMAKE_CXX_STANDARD 17)
 
-enable_testing()
+add_subdirectory(googletest)
 
-#TODO link gtest and evtl gmock
+add_executable(GameHexxagon_test main.cpp GameLogic.cpp Network.cpp)
+target_link_libraries(GameHexxagon_test gtest gmock pthread)
