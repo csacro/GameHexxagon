@@ -33,7 +33,6 @@ bool DataHandler::isConnected() {
 
 void DataHandler::setUserName(std::string userName) {
     mUser.userName = userName;
-    mUser.isConnected = !userName.empty();
 }
 
 bool DataHandler::isGameStartable() {
@@ -162,8 +161,11 @@ bool DataHandler::isMoveToPossible(ModelTileEnum::TileEnum tileEnum) {
 
 
 void DataHandler::setUserId(std::string userId) {
+    mUser.isConnected = !userId.empty();
     mUser.userId = userId;
-    mToView->infoConnected(!userId.empty());
+    if(mToView != NULL) {
+        mToView->infoConnected(mUser.isConnected);
+    }
 }
 
 void DataHandler::forwardAvailableLobbies(std::list<ModelLobby::Lobby> lobbies) {
