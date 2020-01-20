@@ -15,6 +15,7 @@
 class DataHandler: public ViewToData, public ClientToData {
 private:
     DataToView *mToView; //interface to ViewHandler
+    bool isToView = false;
 
     //storage of data for user
     User mUser;

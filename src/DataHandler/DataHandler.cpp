@@ -8,6 +8,7 @@
 
 DataHandler::DataHandler(DataToView &dtv) {
     mToView = &dtv;
+    isToView = true;
 }
 
 
@@ -163,37 +164,50 @@ bool DataHandler::isMoveToPossible(ModelTileEnum::TileEnum tileEnum) {
 void DataHandler::setUserId(std::string userId) {
     mUser.isConnected = !userId.empty();
     mUser.userId = userId;
-    if(mToView != NULL) {
-        mToView->infoConnected(mUser.isConnected);
+    if(isToView) {
+        mToView->infoConnected(!userId.empty());
     }
 }
 
 void DataHandler::forwardAvailableLobbies(std::list<ModelLobby::Lobby> lobbies) {
     mAvailableLobbies = lobbies;
-    mToView->gotAvailableLobbies();
+    if(isToView) {
+        mToView->gotAvailableLobbies();
+    }
 }
 
 void DataHandler::infoLobbyCreated(std::string lobbyId, bool success) {
     if(success) {
         mLobby.lobbyId = lobbyId;
     }
-    mToView->infoLobbyCreated(success);
+    if(isToView) {
+        mToView->infoLobbyCreated(success);
+    }
 }
 
 void DataHandler::infoLobbyJoined(bool success) {
-    mToView->infoLobbyJoined(success);
+    if(isToView) {
+        mToView->infoLobbyJoined(success);
+    }
 }
 
 void DataHandler::forwardLobbyStatus(ModelLobby::Lobby lobby) {
     mLobby = lobby;
-    mToView->gotLobbyStatus();
+    if(isToView) {
+        mToView->gotLobbyStatus();
+    }
+
 }
 
 void DataHandler::infoGameStarted() {
-    mToView->infoGameStarted();
+    if(isToView) {
+        mToView->infoGameStarted();
+    }
 }
 
 void DataHandler::forwardGameStatus(ModelGame::Game game) {
     mGame = game;
-    mToView->gotGameStatus();
+    if(isToView) {
+        mToView->gotGameStatus();
+    }
 }
