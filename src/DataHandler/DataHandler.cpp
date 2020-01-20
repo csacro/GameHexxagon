@@ -43,7 +43,7 @@ bool DataHandler::isGameStartable() {
 std::list<std::string> DataHandler::getJoinableLobbyNames() {
     std::list<std::string> joinableLobbies;
     for(auto it = mAvailableLobbies.begin(); it != mAvailableLobbies.end(); it++) {
-        if(!it->isClosed) {
+        if(!it->isClosed && it->playerTwo.empty()) {
             joinableLobbies.push_back(it->lobbyName);
         }
     }
