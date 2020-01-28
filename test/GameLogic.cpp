@@ -2,21 +2,12 @@
  * @author Carolin Schindler
  */
 
-//TODO
 #include <gtest/gtest.h>
 #include <gmock/gmock-matchers.h>
 #include "../src/Client/Client.h"
 #include "../src/DataHandler/DataHandler.h"
-#include "../src/ViewHandler/ViewHandler.h"
+//#include "../src/ViewHandler/ViewHandler.h"
 
-/*
- * GameViewToView.h/ViewHandler.h:  bool getMoveHelp(ModelTileEnum::TileEnum tile)
- *                                  bool move(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo)
- * ViewToData.h/DataHandler.h:      bool isMoveValid(ModelTileEnum::TileEnum moveFrom, ModelTileEnum::TileEnum moveTo)
- *                                  bool isMoveFromPossible(ModelTileEnum::TileEnum moveFrom)
- *                                  std::list<ModelTileEnum::TileEnum > getValidDirectNeighbours(ModelTileEnum::TileEnum kachel)
- *                                  std::list<ModelTileEnum::TileEnum > getValidSecondaryNeighbours(ModelTileEnum::TileEnum kachel)
- */
 
 TEST(DataHandler, getUserId) {
     DataHandler d;
@@ -110,36 +101,98 @@ TEST(DataHandler, getLobbyIdTolobbyName) {
     EXPECT_EQ(twoPlayerTwo.lobbyId, d.getLobbyId(twoPlayerTwo.lobbyName));
 }
 
-/*
-//TODO: create Game(s) (think about Board and turn and Winner/Tie)
+ModelBoard::Board testBoard = {}; //TODO: Board (one Tile that has everything for neighbours)
+ModelGame::Game baseGame = {"gameId", "playerOne", "playerTwo", "playerOneUserName", "playerTwoUsername", false, false, 13, 8,
+                            testBoard, 10, ModelTileEnum::TileEnum(5), ModelTileEnum::TileEnum(6), "playerOne", false, "", false};
 
 TEST(DataHandler, getGameId) {
     DataHandler d;
 
-    //TODO
+    EXPECT_EQ("", d.getGameId());
+    d.forwardGameStatus(baseGame);
+    EXPECT_EQ(baseGame.gameId, d.getGameId());
 }
 
 TEST(DataHandler, getBoard) {
     DataHandler d;
 
-    //TODO
+    EXPECT_TRUE(d.getBoard().tiles.empty());
+    d.forwardGameStatus(baseGame);
+    //TODO: EXPECT_EQ(baseGame.board, testBoard)
 }
 
 TEST(DataHandler, getGameStrings) {
     DataHandler d;
 
-    //TODO: {playerOnePoints, playerTwoPoints}
+    EXPECT_THAT(d.getGameStrings(), testing::ElementsAreArray({"6", "6"}));
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getGameStrings(), testing::ElementsAreArray({std::to_string(baseGame.playerOnePoints), std::to_string(baseGame.playerTwoPoints)}));
 }
 
 TEST(DataHandler, getGameBooleans) {
     DataHandler d;
 
-    //TODO: if game is over {isTie, isUserWinner}, else {isUserTurn}
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({true}));
+
+    //active Player
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({false}));
+    d.setUserId(baseGame.activePlayer);
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({true}));
+
+    //winner, loser
+    baseGame.winner = "notyou";
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({false, false}));
+    baseGame.winner = baseGame.activePlayer;
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({false, true}));
+
+    //tie
+    baseGame.tie = true;
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({true, false}));
 }
 
 TEST(DataHandler, getLastMove) {
     DataHandler d;
 
+    EXPECT_THAT(d.getLastMove(), testing::ElementsAreArray({ModelTileEnum::TILE_1, ModelTileEnum::TILE_1}));
+    d.forwardGameStatus(baseGame);
+    EXPECT_THAT(d.getLastMove(), testing::ElementsAreArray({baseGame.lastMoveFrom, baseGame.lastMoveTo}));
+}
+
+TEST(DataHandler, isMoveValid) {
+    DataHandler d;
+
     //TODO
 }
- */
+
+TEST(DataHandler, isMoveFromPossible) {
+    DataHandler d;
+
+    //TODO
+}
+
+TEST(DataHandler, getValidDirectNeighbours) {
+    DataHandler d;
+
+    //TODO
+}
+
+TEST(DataHandler, getValidSecondaryNeighbours) {
+    DataHandler d;
+
+    //TODO
+}
+
+TEST(ViewHandler, getMoveHelp) {
+    //ViewHandler v;
+
+    //TODO
+}
+
+TEST(ViewHandler, move) {
+    //ViewHandler v;
+    //TODO
+}

@@ -2,7 +2,7 @@
  * @author Carolin Schindler
  */
 
-//TODO
+//TODO: ALL
 /*
  * MessageType.h:   std::string messageTypeToString(MessageType mt)
  *                  void to_json(nlohmann::json &j, const MessageType messageType)
