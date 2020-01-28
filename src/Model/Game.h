@@ -22,14 +22,14 @@ namespace ModelGame {
         std::string playerTwoUserName; //name of playerTwo in Game
         bool playerOneLeft; //true if playerOne left Game
         bool playerTwoLeft; //true if playerTwo left Game
-        int playerOnePoints; //number of stones belonging to playerOne
-        int playerTwoPoints; //number of stones belonging to playerTwo
+        int playerOnePoints = 6; //number of stones belonging to playerOne
+        int playerTwoPoints = 6; //number of stones belonging to playerTwo
         ModelBoard::Board board; //current Board in Game
         int turn; //number of current round
-        ModelTileEnum::TileEnum lastMoveFrom; //last stone was moved from there
-        ModelTileEnum::TileEnum lastMoveTo; //last stone was moved there
+        ModelTileEnum::TileEnum lastMoveFrom = ModelTileEnum::TILE_1; //last stone was moved from there
+        ModelTileEnum::TileEnum lastMoveTo = ModelTileEnum::TILE_1; //last stone was moved there
         std::string activePlayer; //id of player who makes next move
-        bool tie; //true if neither playerOne nor playerTwo has won
+        bool tie = false; //true if neither playerOne nor playerTwo has won
         std::string winner; //id of player who has won
         bool isClosed; //false as long as Game is running
     };
