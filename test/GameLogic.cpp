@@ -101,7 +101,71 @@ TEST(DataHandler, getLobbyIdTolobbyName) {
     EXPECT_EQ(twoPlayerTwo.lobbyId, d.getLobbyId(twoPlayerTwo.lobbyName));
 }
 
-ModelBoard::Board testBoard = {}; //TODO: Board (one Tile that has everything for neighbours)
+ModelBoard::Board testBoard = {
+    {
+        {ModelTileEnum::TILE_61, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_60, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_59, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_58, ModelTileStateEnum::PLAYERONE},
+        {ModelTileEnum::TILE_57, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_56, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_55, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_54, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_53, ModelTileStateEnum::PLAYERTWO},
+        {ModelTileEnum::TILE_52, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_51, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_50, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_49, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_48, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_47, ModelTileStateEnum::PLAYERONE},
+        {ModelTileEnum::TILE_46, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_45, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_44, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_43, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_42, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_41, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_40, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_39, ModelTileStateEnum::PLAYERONE},
+        {ModelTileEnum::TILE_38, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_37, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_36, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_35, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_34, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_33, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_32, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_31, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_30, ModelTileStateEnum::PLAYERTWO},
+        {ModelTileEnum::TILE_29, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_28, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_27, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_26, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_25, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_24, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_23, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_22, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_21, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_20, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_19, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_18, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_17, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_16, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_15, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_14, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_13, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_12, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_11, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_10, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_9, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_8, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_7, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_6, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_5, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_4, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_3, ModelTileStateEnum::BLOCKED},
+        {ModelTileEnum::TILE_2, ModelTileStateEnum::FREE},
+        {ModelTileEnum::TILE_1, ModelTileStateEnum::FREE},
+    }
+};
 ModelGame::Game baseGame = {"gameId", "playerOne", "playerTwo", "playerOneUserName", "playerTwoUsername", false, false, 13, 8,
                             testBoard, 10, ModelTileEnum::TileEnum(5), ModelTileEnum::TileEnum(6), "playerOne", false, "", false};
 
@@ -133,13 +197,11 @@ TEST(DataHandler, getGameBooleans) {
     DataHandler d;
 
     EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({true}));
-
-    //active Player
+    //active player
     d.forwardGameStatus(baseGame);
     EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({false}));
     d.setUserId(baseGame.activePlayer);
     EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({true}));
-
     //winner, loser
     baseGame.winner = "notyou";
     d.forwardGameStatus(baseGame);
@@ -147,7 +209,6 @@ TEST(DataHandler, getGameBooleans) {
     baseGame.winner = baseGame.activePlayer;
     d.forwardGameStatus(baseGame);
     EXPECT_THAT(d.getGameBooleans(), testing::ElementsAreArray({false, true}));
-
     //tie
     baseGame.tie = true;
     d.forwardGameStatus(baseGame);
@@ -171,28 +232,86 @@ TEST(DataHandler, isMoveValid) {
 TEST(DataHandler, isMoveFromPossible) {
     DataHandler d;
 
-    //TODO
+    d.forwardGameStatus(baseGame);
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_39));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_58));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_30));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_53));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_3));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_29));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_9));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_50));
+
+    d.setUserId(baseGame.activePlayer);
+    EXPECT_TRUE(d.isMoveFromPossible(ModelTileEnum::TILE_39));
+    EXPECT_TRUE(d.isMoveFromPossible(ModelTileEnum::TILE_58));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_30));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_53));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_3));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_29));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_9));
+    EXPECT_FALSE(d.isMoveFromPossible(ModelTileEnum::TILE_50));
 }
 
 TEST(DataHandler, getValidDirectNeighbours) {
     DataHandler d;
 
-    //TODO
+    d.forwardGameStatus(baseGame);
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_47).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
+
+    d.setUserId(baseGame.activePlayer);
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_47), testing::ElementsAreArray({ModelTileEnum::TILE_40, ModelTileEnum::TILE_54}));
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty(), testing::ElementsAreArray({ModelTileEnum::TILE_38, ModelTileEnum::TILE_40}));
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty(), testing::ElementsAreArray({ModelTileEnum::TILE_52, ModelTileEnum::TILE_57}));
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
 }
 
 TEST(DataHandler, getValidSecondaryNeighbours) {
     DataHandler d;
 
-    //TODO
+    d.forwardGameStatus(baseGame);
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_47).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
+
+    d.setUserId(baseGame.activePlayer);
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_47),
+    // testing::ElementsAreArray({ModelTileEnum::TILE_32, ModelTileEnum::TILE_38, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_55, ModelTileEnum::TILE_60}));
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty(),
+    // testing::ElementsAreArray({ModelTileEnum::TILE_21, ModelTileEnum::TILE_22, ModelTileEnum::TILE_23, ModelTileEnum::TILE_32, ModelTileEnum::TILE_37, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}));
+    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty(),
+    // testing::ElementsAreArray({ModelTileEnum::TILE_45, ModelTileEnum::TILE_51, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}));
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
 }
 
 TEST(ViewHandler, getMoveHelp) {
-    //ViewHandler v;
-
-    //TODO
+    //return value only depends on correctness of DataHandler isMoveFromPossible
 }
 
 TEST(ViewHandler, move) {
-    //ViewHandler v;
-    //TODO
+    //return value only depends on correctness of DataHandler isMoveValid
 }
