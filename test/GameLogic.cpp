@@ -6,7 +6,6 @@
 #include <gmock/gmock-matchers.h>
 #include "../src/Client/Client.h"
 #include "../src/DataHandler/DataHandler.h"
-//#include "../src/ViewHandler/ViewHandler.h"
 
 
 TEST(DataHandler, getUserId) {
@@ -182,7 +181,7 @@ TEST(DataHandler, getBoard) {
 
     EXPECT_TRUE(d.getBoard().tiles.empty());
     d.forwardGameStatus(baseGame);
-    //TODO: EXPECT_EQ(baseGame.board, testBoard)
+    //todo EXPECT_EQ(baseGame.board, testBoard);
 }
 
 TEST(DataHandler, getGameStrings) {
@@ -268,9 +267,12 @@ TEST(DataHandler, getValidDirectNeighbours) {
     EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
 
     d.setUserId(baseGame.activePlayer);
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_47), testing::ElementsAreArray({ModelTileEnum::TILE_40, ModelTileEnum::TILE_54}));
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty(), testing::ElementsAreArray({ModelTileEnum::TILE_38, ModelTileEnum::TILE_40}));
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty(), testing::ElementsAreArray({ModelTileEnum::TILE_52, ModelTileEnum::TILE_57}));
+    EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_47),
+            testing::UnorderedElementsAreArray({ModelTileEnum::TILE_40, ModelTileEnum::TILE_54}));
+    EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_39),
+            testing::UnorderedElementsAreArray({ModelTileEnum::TILE_38, ModelTileEnum::TILE_40}));
+    EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_58),
+            testing::UnorderedElementsAreArray({ModelTileEnum::TILE_52, ModelTileEnum::TILE_57}));
     EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
     EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
     EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
@@ -283,29 +285,35 @@ TEST(DataHandler, getValidSecondaryNeighbours) {
     DataHandler d;
 
     d.forwardGameStatus(baseGame);
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_47).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_47).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_39).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_58).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_50).empty());
 
     d.setUserId(baseGame.activePlayer);
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_47),
-    // testing::ElementsAreArray({ModelTileEnum::TILE_32, ModelTileEnum::TILE_38, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_55, ModelTileEnum::TILE_60}));
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_39).empty(),
-    // testing::ElementsAreArray({ModelTileEnum::TILE_21, ModelTileEnum::TILE_22, ModelTileEnum::TILE_23, ModelTileEnum::TILE_32, ModelTileEnum::TILE_37, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}));
-    //TODO EXPECT_THAT(d.getValidDirectNeighbours(ModelTileEnum::TILE_58).empty(),
-    // testing::ElementsAreArray({ModelTileEnum::TILE_45, ModelTileEnum::TILE_51, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55}));
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_30).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_53).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_3).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_29).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_9).empty());
-    EXPECT_TRUE(d.getValidDirectNeighbours(ModelTileEnum::TILE_50).empty());
+    EXPECT_THAT(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_47),
+            testing::Each(testing::AnyOf(
+                    ModelTileEnum::TILE_32, ModelTileEnum::TILE_38, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_55, ModelTileEnum::TILE_60
+            )));
+    EXPECT_THAT(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_39),
+            testing::Each(testing::AnyOf(
+                    ModelTileEnum::TILE_21, ModelTileEnum::TILE_22, ModelTileEnum::TILE_23, ModelTileEnum::TILE_32, ModelTileEnum::TILE_37, ModelTileEnum::TILE_41, ModelTileEnum::TILE_45, ModelTileEnum::TILE_49, ModelTileEnum::TILE_52, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55
+            )));
+    EXPECT_THAT(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_58),
+            testing::Each(testing::AnyOf(
+                    ModelTileEnum::TILE_45, ModelTileEnum::TILE_51, ModelTileEnum::TILE_54, ModelTileEnum::TILE_55, ModelTileEnum::TILE_60
+            )));
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_30).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_53).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_3).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_29).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_9).empty());
+    EXPECT_TRUE(d.getValidSecondaryNeighbours(ModelTileEnum::TILE_50).empty());
 }
 
 TEST(ViewHandler, getMoveHelp) {
