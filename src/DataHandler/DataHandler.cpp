@@ -131,10 +131,12 @@ bool DataHandler::isMoveFromPossible(ModelTileEnum::TileEnum moveFrom) {
 
 std::list<ModelTileEnum::TileEnum> DataHandler::getValidDirectNeighbours(ModelTileEnum::TileEnum kachel) {
     std::list<ModelTileEnum::TileEnum> ret;
-    std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
-    for(auto it = directNeighbours.begin(); it != directNeighbours.end(); it++) {
-        if(isMoveToPossible(*it)) {
-            ret.push_back(*it);
+    if(isMoveFromPossible(kachel)) {
+        std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
+        for (auto it = directNeighbours.begin(); it != directNeighbours.end(); it++) {
+            if (isMoveToPossible(*it)) {
+                ret.push_back(*it);
+            }
         }
     }
     return ret;
@@ -142,17 +144,19 @@ std::list<ModelTileEnum::TileEnum> DataHandler::getValidDirectNeighbours(ModelTi
 
 std::list<ModelTileEnum::TileEnum> DataHandler::getValidSecondaryNeighbours(ModelTileEnum::TileEnum kachel) {
     std::list<ModelTileEnum::TileEnum> ret;
-    std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
-    std::list<ModelTileEnum::TileEnum> secondaryNeighbours;
-    for(ModelTileEnum::TileEnum &te: directNeighbours) {
-        secondaryNeighbours = neighboursLut.at(te);
-        for(auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
-            if(isMoveToPossible(*it) && std::find(directNeighbours.begin(), directNeighbours.end(), *it) == directNeighbours.end()) {
-                ret.push_back(*it);
+    if(isMoveFromPossible(kachel)) {
+        std::list<ModelTileEnum::TileEnum> directNeighbours = neighboursLut.at(kachel);
+        std::list<ModelTileEnum::TileEnum> secondaryNeighbours;
+        for (ModelTileEnum::TileEnum &te: directNeighbours) {
+            secondaryNeighbours = neighboursLut.at(te);
+            for (auto it = secondaryNeighbours.begin(); it != secondaryNeighbours.end(); it++) {
+                if (isMoveToPossible(*it) &&
+                    std::find(directNeighbours.begin(), directNeighbours.end(), *it) == directNeighbours.end()) {
+                    ret.push_back(*it);
+                }
             }
         }
     }
-
     return ret;
 }
 
