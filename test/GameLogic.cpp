@@ -181,7 +181,7 @@ TEST(DataHandler, getBoard) {
 
     EXPECT_TRUE(d.getBoard().tiles.empty());
     d.forwardGameStatus(baseGame);
-    //TODO EXPECT_EQ(baseGame.board, testBoard);
+    EXPECT_EQ(baseGame.board.tiles, testBoard.tiles);
 }
 
 TEST(DataHandler, getGameStrings) {
