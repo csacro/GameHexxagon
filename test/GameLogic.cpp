@@ -181,7 +181,7 @@ TEST(DataHandler, getBoard) {
 
     EXPECT_TRUE(d.getBoard().tiles.empty());
     d.forwardGameStatus(baseGame);
-    //todo EXPECT_EQ(baseGame.board, testBoard);
+    //TODO EXPECT_EQ(baseGame.board, testBoard);
 }
 
 TEST(DataHandler, getGameStrings) {
@@ -225,7 +225,50 @@ TEST(DataHandler, getLastMove) {
 TEST(DataHandler, isMoveValid) {
     DataHandler d;
 
-    //TODO
+    d.forwardGameStatus(baseGame);
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_54));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_40));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_46));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_53));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_39));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_30));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_58));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_31));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_32));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_38));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_41));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_45));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_49));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_52));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_55));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_60));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_60));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_59));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_7));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_53, ModelTileEnum::TILE_52));
+
+    d.setUserId(baseGame.activePlayer);
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_54));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_40));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_46));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_53));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_39));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_30));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_58));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_31));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_32));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_38));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_41));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_45));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_49));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_52));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_55));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_47, ModelTileEnum::TILE_60));
+    EXPECT_TRUE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_60));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_59));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_58, ModelTileEnum::TILE_7));
+    EXPECT_FALSE(d.isMoveValid(ModelTileEnum::TILE_53, ModelTileEnum::TILE_52));
+
 }
 
 TEST(DataHandler, isMoveFromPossible) {
