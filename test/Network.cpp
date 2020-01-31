@@ -24,10 +24,6 @@ TEST(MessageType, messageTypeToString) {
     EXPECT_EQ("Strike", messageTypeToString(Strike));
 }
 
-TEST(MessageType, to_json) {
-    //return value only depends on correctness of MessageType messageTypeToString (and nlohmann-json)
-}
-
 TEST(TileEnum, TileEnumToString) {
     EXPECT_EQ("TILE_1", ModelTileEnum::TileEnumToString(ModelTileEnum::TILE_1));
     EXPECT_EQ("TILE_9", ModelTileEnum::TileEnumToString(ModelTileEnum::TILE_9));
@@ -40,17 +36,5 @@ TEST(TileEnum, StringToTileEnum) {
     EXPECT_EQ(ModelTileEnum::TILE_9, ModelTileEnum::StringToTileEnum("TILE_9"));
     EXPECT_EQ(ModelTileEnum::TILE_50, ModelTileEnum::StringToTileEnum("TILE_50"));
     EXPECT_EQ(ModelTileEnum::TILE_61, ModelTileEnum::StringToTileEnum("TILE_61"));
-}
-
-TEST(Lobby, from_json) {
-    //TODO
-}
-
-TEST(Game, from_json) {
-    //TODO
-}
-
-TEST(Board, from_json) {
-    //TODO
 }
 
