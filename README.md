@@ -57,10 +57,12 @@ make
 ### Game
 run X server on port 0
 ```bash
-./src/GameHexxagon_src
+cd src
+./GameHexxagon_src
 ```
 (runnable on Windows with WSL and Xming)  
 ### Tests
 ```bash
-./test/GameHexxagon_test
+cd test
+./GameHexxagon_test
 ```
